@@ -19,7 +19,7 @@ import java.util.List;
 public class ForLess extends AppCompatActivity {
 
      protected Button next, reset, bt1, bt2, bt3, bt4;
-     protected TextView text;
+     protected TextView text, score;
 
     String Control;
     String[] KeyWord;
@@ -63,6 +63,8 @@ public class ForLess extends AppCompatActivity {
         next = (Button)findViewById(R.id.next);
         reset = (Button)findViewById(R.id.reset);
         text = (TextView)findViewById(R.id.text);
+        score = (TextView)findViewById(R.id.score);
+        LetsGo();
     }
 
     public void Generate() {
@@ -84,6 +86,10 @@ public class ForLess extends AppCompatActivity {
     }
 
     public void TextOnButtons(View v){
+        LetsGo();
+
+    }
+    public void LetsGo(){
         Generate();
         bt1.setText(String.valueOf(Extract[0]));
         bt2.setText(String.valueOf(Extract[1]));
@@ -95,18 +101,19 @@ public class ForLess extends AppCompatActivity {
         bt2.setEnabled(true);
         bt3.setEnabled(true);
         bt4.setEnabled(true);
-
     }
 
     public void Validate() {
         if (lister.contains(fromButton)) {
             setCount(count -1);
             String sc = Integer.toString(getCount());
-            text.setText("Пробуй еще раз. Счет: " + sc);
+            text.setText("Пробуй еще раз");
+            score.setText(sc);
         } else {
             setCount(count +1);
             String sc = Integer.toString(getCount());
-            text.setText("Молодец! Счет: " + sc);
+            text.setText("Молодец!");
+            score.setText(sc);
         }
     }
     public void Reset(View v) {
