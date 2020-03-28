@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/desk2"
+    tools:context=".ForLess">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="239dp"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        >
+
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="BT1"
+            android:text="Слово" />
+
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="BT2"
+            android:text="Слово" />
+
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="BT3"
+            android:text="Слово" />
+
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="BT4"
+            android:text="слово" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="381dp"
+        android:layout_height="67dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857">
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="TextOnButtons"
+            android:text="Дальше" />
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Reset"
+            android:text="Сброс" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="217dp"
+        android:layout_height="58dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Результат"
+        android:textColor="@android:color/holo_orange_light"
+        android:textIsSelectable="false"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

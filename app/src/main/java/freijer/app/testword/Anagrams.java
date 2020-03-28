@@ -116,7 +116,6 @@ public class Anagrams extends AppCompatActivity {
             score.setText(sc);
             check.setEnabled(false);
 
-
         }
         else {
             text.setText("Нэверно!");

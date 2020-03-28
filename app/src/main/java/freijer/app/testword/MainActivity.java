@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Two(View v){
-        Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT);toast.show();
+        Intent intent = new Intent(".ForLess");
+        startActivity(intent);
     }
     public void Tree(View v){
         Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT);toast.show();
