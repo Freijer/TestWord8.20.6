@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,8 +45,44 @@ public class Anagrams extends AppCompatActivity {
 
     ArrayList<String> WordList_1 = new ArrayList<String>(6); // то, что вводит пользователь нажимая на кнопки
 
+    String fromt;
+    String[] ReadWords; //массив считанный
     public void RandomGen(){
-        String[] stringArr = {"сапфир","ураган","разбор","дракон"};
+           /*
+            try {
+                InputStream is = getAssets().open("anagramlist.txt");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                this.fromt = new String(buffer);
+                ArrayList<String> list = new ArrayList<String>();
+                if (!fromt.isEmpty()) {
+                    list.add(fromt);
+                }
+                this.ReadWords = list.toArray(new String[0]);
+            } catch (IOException e) {
+                // Should never happen!
+                throw new RuntimeException(e);
+            }
+*/
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("anagramlist.txt")));
+            String str;
+            ArrayList<String> list = new ArrayList<String>();
+            while ((str = reader.readLine()) != null) {
+                if (!str.isEmpty()) {
+                    list.add(str);
+                }
+            }
+            this.ReadWords = list.toArray(new String[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        String[] stringArr = ReadWords;
         int oneLength = stringArr.length;
         int rand1 = (int) (Math.random() * oneLength);
         String RandomWord = stringArr[rand1];
@@ -61,8 +101,11 @@ public class Anagrams extends AppCompatActivity {
     }
 
 
+    public void Rando() {
 
-    @Override
+    }
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anagrams);
@@ -98,6 +141,7 @@ public class Anagrams extends AppCompatActivity {
         B5.setText(String.valueOf(MixedleWord[4]));
         B6.setText(String.valueOf(MixedleWord[5]));
         check.setEnabled(true);
+        //text.setText(ReadWords[0]);
 
     }
 

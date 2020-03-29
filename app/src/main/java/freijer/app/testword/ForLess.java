@@ -1,5 +1,7 @@
 package freijer.app.testword;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +29,7 @@ public class ForLess extends AppCompatActivity {
 
      protected Button next, reset, bt1, bt2, bt3, bt4;
      protected TextView text, score;
+
 
     String Control;
     String[] KeyWord;
@@ -50,7 +60,6 @@ public class ForLess extends AppCompatActivity {
     String[] stringArr = {"Бег","Полет","Разбор","Заплыв","Собрание","Заплыв" ,"Поджег","Победа"};
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +74,10 @@ public class ForLess extends AppCompatActivity {
         text = (TextView)findViewById(R.id.text);
         score = (TextView)findViewById(R.id.score);
         LetsGo();
+
+
+
+
     }
 
     public void Generate() {
@@ -95,7 +108,9 @@ public class ForLess extends AppCompatActivity {
         bt2.setText(String.valueOf(Extract[1]));
         bt3.setText(String.valueOf(Extract[2]));
         bt4.setText(String.valueOf(Extract[3]));
+
         text.setText("Выбери лишнее");
+
 
         bt1.setEnabled(true);
         bt2.setEnabled(true);
