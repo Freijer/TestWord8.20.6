@@ -9,12 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".animation">
+            android:name=".animation""
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name=".animation"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ForLess"
             android:label="@string/title_activity_for_less"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name=".ForLess" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -24,6 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name=".Anagrams" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

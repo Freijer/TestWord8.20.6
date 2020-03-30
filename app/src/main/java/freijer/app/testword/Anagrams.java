@@ -3,21 +3,15 @@ package freijer.app.testword;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,34 +32,14 @@ public class Anagrams extends AppCompatActivity {
     public int getCount() {
         return count;
     }
-
     public void setCount(int count) {
         this.count = count;
     }
 
     ArrayList<String> WordList_1 = new ArrayList<String>(6); // то, что вводит пользователь нажимая на кнопки
 
-    String fromt;
     String[] ReadWords; //массив считанный
     public void RandomGen(){
-           /*
-            try {
-                InputStream is = getAssets().open("anagramlist.txt");
-                int size = is.available();
-                byte[] buffer = new byte[size];
-                is.read(buffer);
-                is.close();
-                this.fromt = new String(buffer);
-                ArrayList<String> list = new ArrayList<String>();
-                if (!fromt.isEmpty()) {
-                    list.add(fromt);
-                }
-                this.ReadWords = list.toArray(new String[0]);
-            } catch (IOException e) {
-                // Should never happen!
-                throw new RuntimeException(e);
-            }
-*/
 
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("anagramlist.txt")));
@@ -101,10 +75,6 @@ public class Anagrams extends AppCompatActivity {
     }
 
 
-    public void Rando() {
-
-    }
-
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,9 +89,8 @@ public class Anagrams extends AppCompatActivity {
         start = (Button)findViewById(R.id.start);
         check = (Button)findViewById(R.id.check);
         reset = (Button)findViewById(R.id.reset);
-        text = (TextView)findViewById(R.id.text);
+        text = (TextView)findViewById(R.id.text1);
         score = (TextView)findViewById(R.id.score);
-
     }
 
     public void LetsStart(View v){

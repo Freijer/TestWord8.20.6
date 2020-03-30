@@ -71,26 +71,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="381dp"
-        android:layout_height="67dp"
+        android:layout_width="198dp"
+        android:layout_height="73dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.857">
-
-        <Button
-            android:id="@+id/next"
-            android:layout_width="157dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="7sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/forlessbutton"
-            android:onClick="TextOnButtons"
-            android:text="Дальше" />
+        app:layout_constraintVertical_bias="0.851">
 
         <Button
             android:id="@+id/reset"
@@ -108,7 +96,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/text1"
         android:layout_width="217dp"
         android:layout_height="58dp"
         android:background="@drawable/forlesstext"

@@ -9,6 +9,8 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,9 +29,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
-    Button anagrams, twogame, treegame;
+    Button anagrams, twogame, treegame, btnTranslate;
     TextView TER;
     String[] stringArr;
 
@@ -45,41 +49,37 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-    public void GenerateWord() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Android\\app\\TestWord\\app\\src\\main\\assets\\anagramlist.txt"));
-        String str;
-        ArrayList<String> list = new ArrayList<String>();
-        while ((str = reader.readLine()) != null) {
-            if (!str.isEmpty()) {
-                list.add(str);
-            }
-        }
-        this.stringArr = list.toArray(new String[0]);
-    }
+//    public void Ani(View view){
+//        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+//        view.startAnimation(animTranslate);
+//    }
 
 
 
     public void Sec(View v){
         Intent intent = new Intent(".Anagrams");
         startActivity(intent);
+
     }
 
     public void Two(View v){
         Intent intent = new Intent(".ForLess");
         startActivity(intent);
     }
-    public void Tree(View v){
-        Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT);toast.show();
+    public void Tree(View v) {
+//        Intent intent = new Intent(".animation");
+//        startActivity(intent);
+
+        Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
+
+//        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+//        Button btnTranslate = (Button) findViewById(R.id.treegame);
+//        btnTranslate.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                view.startAnimation(animTranslate);
+//            }
+//        });
     }
-
-
-
-
-
-
-
-
-
 }
+

@@ -1,9 +1,8 @@
 package freijer.app.testword;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,21 +13,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ForLess extends AppCompatActivity {
+import static android.view.View.GONE;
 
-     protected Button reset, bt1, bt2, bt3, bt4;
-     protected TextView text, score;
+public class animation extends AppCompatActivity {
 
-//    при вепрном ответе кнопки уезжают
-//    и приезжают новые
-//    с новым текстом
+    Button  btn1, btn2, btn3, btn4;
+
+     TextView qwr;
 
     String Control;
     String[] KeyWord;
     String[] Buffer;
     String[] Extract; //Использовать для распредление слов на кнопки, итоговый массив
     List<String> list;
-    String fromButton;
+    String from;
     List<String> lister;
     int count = 0;
     public int getCount() {
@@ -52,19 +50,16 @@ public class ForLess extends AppCompatActivity {
     String[] stringArr = {"Бег","Полет","Разбор","Заплыв","Собрание","Заплыв" ,"Поджег","Победа"};
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_for_less);
-
-        bt1 = (Button)findViewById(R.id.bt1);
-        bt2 = (Button)findViewById(R.id.bt2);
-        bt3 = (Button)findViewById(R.id.bt3);
-        bt4 = (Button)findViewById(R.id.bt4);
-        reset = (Button)findViewById(R.id.reset);
-        text = (TextView)findViewById(R.id.text1);
-        score = (TextView)findViewById(R.id.score);
-        LetsGo();
+        setContentView(R.layout.activity_animation);
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        Lets();
 
     }
 
@@ -86,70 +81,50 @@ public class ForLess extends AppCompatActivity {
         this.lister = Arrays.asList(KeyWord);
     }
 
-//    public void TextOnButtons(View v){
-//        LetsGo();
-//
-//    }
-    public void LetsGo(){
+    public void Lets(){
         Generate();
-        bt1.setText(String.valueOf(Extract[0]));
-        bt2.setText(String.valueOf(Extract[1]));
-        bt3.setText(String.valueOf(Extract[2]));
-        bt4.setText(String.valueOf(Extract[3]));
-
-        text.setText("Выбери лишнее");
+        btn1.setText(String.valueOf(Extract[0]));
+        btn2.setText(String.valueOf(Extract[1]));
+        btn3.setText(String.valueOf(Extract[2]));
+        btn4.setText(String.valueOf(Extract[3]));
 
 
-        bt1.setEnabled(true);
-        bt2.setEnabled(true);
-        bt3.setEnabled(true);
-        bt4.setEnabled(true);
+//        bt1.setEnabled(true);
+//        bt2.setEnabled(true);
+//        bt3.setEnabled(true);
+//        bt4.setEnabled(true);
     }
 
     public void Validate() {
-        if (lister.contains(fromButton)) {
-            setCount(count -1);
-            String sc = Integer.toString(getCount());
-            LetsGo();
-            score.setText(sc);
-            text.setText("Пробуй еще раз");
-            fromButton = "";
+        if (lister.contains(from)) {
+           qwr.setText("Верно");
         } else {
-            setCount(count +1);
-            String sc = Integer.toString(getCount());
-            score.setText(sc);
-            LetsGo();
-            text.setText("Молодец!");
-            fromButton = "";
+
         }
     }
-    public void Reset(View v) {
-        text.setText("Выбери лишнее");
-        bt1.setEnabled(true);
-        bt2.setEnabled(true);
-        bt3.setEnabled(true);
-        bt4.setEnabled(true);
-    }
 
 
-    public void BT1(View view) {
+
+
+
+    public void ActBT1 (View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
         final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
-        bt2.startAnimation(a2);
-        bt3.startAnimation(a);
-        bt4.startAnimation(a2);
-        fromButton = (String) bt1.getText();
-        Validate();
+        btn1.startAnimation(a);
+        btn2.startAnimation(a2);
+        btn3.startAnimation(a);
+        btn4.startAnimation(a2);
 
+        Validate();
+        from = (String) btn1.getText();
         a.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-
+                Lets();
 
             }
             @Override
@@ -158,16 +133,16 @@ public class ForLess extends AppCompatActivity {
         });
     }
 
-    public void BT2(View view) {
+    public void ActBT2 (View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
         final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
-        bt2.startAnimation(a2);
-        bt3.startAnimation(a);
-        bt4.startAnimation(a2);
-        fromButton = (String) bt2.getText();
+        btn1.startAnimation(a);
+        btn2.startAnimation(a2);
+        btn3.startAnimation(a);
+        btn4.startAnimation(a2);
         Validate();
+        from = (String) btn2.getText();
 
         a.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -175,56 +150,7 @@ public class ForLess extends AppCompatActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-            }
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-    }
-
-    public void BT3(View view) {
-        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
-        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
-        bt2.startAnimation(a2);
-        bt3.startAnimation(a);
-        bt4.startAnimation(a2);
-        fromButton = (String) bt3.getText();
-        Validate();
-
-        a.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-
-            }
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-    }
-    public void BT4(View view) {
-        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
-        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
-        bt2.startAnimation(a2);
-        bt3.startAnimation(a);
-        bt4.startAnimation(a2);
-        fromButton = (String) bt4.getText();
-        Validate();
-
-        a.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
+                Lets();
 
             }
             @Override
@@ -233,8 +159,84 @@ public class ForLess extends AppCompatActivity {
         });
     }
 
+    public void ActBT3 (View view) {
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
+        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
+        btn1.startAnimation(a);
+        btn2.startAnimation(a2);
+        btn3.startAnimation(a);
+        btn4.startAnimation(a2);
+
+        Validate();
+        from = (String) btn3.getText();
+        a.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Lets();
+
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
+    public void ActBT4 (View view) {
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
+        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
+        btn1.startAnimation(a);
+        btn2.startAnimation(a2);
+        btn3.startAnimation(a);
+        btn4.startAnimation(a2);
+
+        Validate();
+        from = (String) btn4.getText();
+        a.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Lets();
+
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
 
 
+
+
+
+
+
+
+
+//    public void BT1(){
+//        final Animation animONE = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+//        btnTrans.setOnClickListener(new Button.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                view.startAnimation(animONE);
+//            }
+//        });
+//    }
+//
+//    public void BT2(){
+//        final Animation animTWO = AnimationUtils.loadAnimation(this, R.anim.anim_left);
+//        btnAns.setOnClickListener(new Button.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                view.startAnimation(animTWO);
+//            }
+//        });
+//    }
 
 
 
