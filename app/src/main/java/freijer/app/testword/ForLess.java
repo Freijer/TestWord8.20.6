@@ -1,5 +1,6 @@
 package freijer.app.testword;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -106,24 +107,38 @@ public class ForLess extends AppCompatActivity {
         bt4.setEnabled(true);
     }
 
+    public void Colorize(){
+        if (getCount()<=0){
+            score.setTextColor(Color.parseColor("#e30b1a"));
+        }
+        else if(getCount()>=-1){
+            score.setTextColor(Color.parseColor("#e8e409"));
+        }
+    }
+
+
     public void Validate() {
+        Colorize();
         if (lister.contains(fromButton)) {
             setCount(count -1);
             String sc = Integer.toString(getCount());
             LetsGo();
             score.setText(sc);
             text.setText("Пробуй еще раз");
+            text.setTextColor(Color.parseColor("#e30b1a"));
             fromButton = "";
         } else {
             setCount(count +1);
             String sc = Integer.toString(getCount());
             score.setText(sc);
             LetsGo();
+            text.setTextColor(Color.parseColor("#e8e409"));
             text.setText("Молодец!");
             fromButton = "";
         }
     }
     public void Reset(View v) {
+        text.setTextColor(Color.parseColor("#e8e409"));
         text.setText("Выбери лишнее");
         bt1.setEnabled(true);
         bt2.setEnabled(true);
@@ -135,11 +150,12 @@ public class ForLess extends AppCompatActivity {
     public void BT1(View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
+        Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+        bt1.startAnimation(a4);
         bt2.startAnimation(a2);
         bt3.startAnimation(a);
-        bt4.startAnimation(a2);
+        bt4.startAnimation(a3);
         fromButton = (String) bt1.getText();
         Validate();
 
@@ -149,7 +165,6 @@ public class ForLess extends AppCompatActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-
 
             }
             @Override
@@ -161,11 +176,12 @@ public class ForLess extends AppCompatActivity {
     public void BT2(View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
+        Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+        bt1.startAnimation(a4);
         bt2.startAnimation(a2);
         bt3.startAnimation(a);
-        bt4.startAnimation(a2);
+        bt4.startAnimation(a3);
         fromButton = (String) bt2.getText();
         Validate();
 
@@ -185,11 +201,12 @@ public class ForLess extends AppCompatActivity {
     public void BT3(View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
+        Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+        bt1.startAnimation(a4);
         bt2.startAnimation(a2);
         bt3.startAnimation(a);
-        bt4.startAnimation(a2);
+        bt4.startAnimation(a3);;
         fromButton = (String) bt3.getText();
         Validate();
 
@@ -200,7 +217,6 @@ public class ForLess extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
 
-
             }
             @Override
             public void onAnimationRepeat(Animation animation) {
@@ -210,11 +226,12 @@ public class ForLess extends AppCompatActivity {
     public void BT4(View view) {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
-        final Animation a3 = AnimationUtils.loadAnimation(this, R.anim.visibleright);
-        bt1.startAnimation(a);
+        Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+        bt1.startAnimation(a4);
         bt2.startAnimation(a2);
         bt3.startAnimation(a);
-        bt4.startAnimation(a2);
+        bt4.startAnimation(a3);
         fromButton = (String) bt4.getText();
         Validate();
 
@@ -224,8 +241,6 @@ public class ForLess extends AppCompatActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-
-
             }
             @Override
             public void onAnimationRepeat(Animation animation) {
