@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -102,6 +103,7 @@ public class Anagrams extends AppCompatActivity {
     }
 
     public void Next(){
+        text.setTextColor(Color.parseColor("#000000"));
         text.setText("Собери слово");
         WordList_1.clear();
         B1.setEnabled(true);
@@ -155,11 +157,25 @@ public class Anagrams extends AppCompatActivity {
             text.setTextColor(Color.parseColor("#e30b1a"));
             score.setTextColor(Color.parseColor("#e30b1a"));
             text.setText("Нэверно!");
+            Toast toast = Toast.makeText(getApplicationContext(), "Нэверно!, -1 очко", Toast.LENGTH_SHORT); toast.show();
             setCount(count -1);
             String sc = Integer.toString(getCount());
             //score.setText(Integer.toString(count));
             score.setText(sc);
             check.setEnabled(false);
+            Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+            Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
+            Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+            Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+            Animation a5 = AnimationUtils.loadAnimation(this, R.anim.cornerright);
+            Animation a6 = AnimationUtils.loadAnimation(this, R.anim.conerleft);
+            B1.startAnimation(a6);
+            B2.startAnimation(a2);
+            B3.startAnimation(a1);
+            B4.startAnimation(a3);
+            B5.startAnimation(a5);
+            B6.startAnimation(a4);
+            Next();
         }
     }
 
