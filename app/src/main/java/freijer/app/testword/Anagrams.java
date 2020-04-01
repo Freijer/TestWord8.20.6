@@ -1,5 +1,6 @@
 package freijer.app.testword;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -7,6 +8,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -91,10 +94,15 @@ public class Anagrams extends AppCompatActivity {
         reset = (Button)findViewById(R.id.reset);
         text = (TextView)findViewById(R.id.text1);
         score = (TextView)findViewById(R.id.score);
+            Next();
     }
 
-    public void LetsStart(View v){
-        text.setText(" ");
+    public void LetsStart(){
+        Next();
+    }
+
+    public void Next(){
+        text.setText("Собери слово");
         WordList_1.clear();
         B1.setEnabled(true);
         B2.setEnabled(true);
@@ -111,7 +119,6 @@ public class Anagrams extends AppCompatActivity {
         B6.setText(String.valueOf(MixedleWord[5]));
         check.setEnabled(true);
         //text.setText(ReadWords[0]);
-
     }
 
 
@@ -122,15 +129,31 @@ public class Anagrams extends AppCompatActivity {
         String Key = (String.join("", array));
         text.setText(Key + " " + Control);
         if (Key.equals(Control)){
+            text.setTextColor(Color.parseColor("#000000"));
+            score.setTextColor(Color.parseColor("#000000"));
             text.setText("Верно!");
             setCount(count +1);
             String sc = Integer.toString(getCount());
             //score.setText(Integer.toString(count));
             score.setText(sc);
             check.setEnabled(false);
-
+            Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+            Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_left);
+            Animation a3 = AnimationUtils.loadAnimation(this, R.anim.anim_top);
+            Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_down);
+            Animation a5 = AnimationUtils.loadAnimation(this, R.anim.cornerright);
+            Animation a6 = AnimationUtils.loadAnimation(this, R.anim.conerleft);
+            B1.startAnimation(a6);
+            B2.startAnimation(a2);
+            B3.startAnimation(a1);
+            B4.startAnimation(a3);
+            B5.startAnimation(a5);
+            B6.startAnimation(a4);
+            Next();
         }
         else {
+            text.setTextColor(Color.parseColor("#e30b1a"));
+            score.setTextColor(Color.parseColor("#e30b1a"));
             text.setText("Нэверно!");
             setCount(count -1);
             String sc = Integer.toString(getCount());
@@ -149,41 +172,54 @@ public class Anagrams extends AppCompatActivity {
         B4.setEnabled(true);
         B5.setEnabled(true);
         B6.setEnabled(true);
+        check.setEnabled(true);
+        text.setTextColor(Color.parseColor("#000000"));
     }
+
 
 
     public void BT1(View view) {
         WordList_1.add(String.valueOf(MixedleWord[0]));
         text.setText(String.valueOf(WordList_1));
         B1.setEnabled(false);
+
     }
+
 
     public void BT2(View v) {
         WordList_1.add(String.valueOf(MixedleWord[1]));
         text.setText(String.valueOf(WordList_1));
         B2.setEnabled(false);
+
     }
+
 
     public void BT3(View v) {
         WordList_1.add(String.valueOf(MixedleWord[2]));
         text.setText(String.valueOf(WordList_1));
         B3.setEnabled(false);
+
     }
+
     public void BT4(View v) {
         WordList_1.add(String.valueOf(MixedleWord[3]));
         text.setText(String.valueOf(WordList_1));
         B4.setEnabled(false);
+
     }
+
     public void BT5(View v) {
         WordList_1.add(String.valueOf(MixedleWord[4]));
         text.setText(String.valueOf(WordList_1));
         B5.setEnabled(false);
-    }
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void BT6(View v) {
         WordList_1.add(String.valueOf(MixedleWord[5]));
         text.setText(String.valueOf(WordList_1));
         B6.setEnabled(false);
+
 
     }
 

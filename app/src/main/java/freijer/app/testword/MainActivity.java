@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
     public void Tree(View v) {
 //        Intent intent = new Intent(".animation");
 //        startActivity(intent);
-
-        Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
+//
+       Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
 
 //        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
 //        Button btnTranslate = (Button) findViewById(R.id.treegame);
