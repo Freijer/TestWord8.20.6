@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".animation">
-
+        <activity android:name=".Dropwords">
             <intent-filter>
-                <action android:name=".animation"/>
+                <action android:name=".Dropwords" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".animation">
+            <intent-filter>
+                <action android:name=".animation" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

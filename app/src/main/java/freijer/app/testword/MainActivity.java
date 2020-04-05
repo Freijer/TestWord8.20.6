@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button anagrams, twogame, treegame, btnTranslate;
+    Button anagrams, twogame, treegame, wordDown;
     TextView TER;
     String[] stringArr;
 
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         anagrams = (Button) findViewById(R.id.anagrams);
         twogame = (Button) findViewById(R.id.twogame);
         treegame = (Button) findViewById(R.id.treegame);
+        wordDown = (Button) findViewById(R.id.wordDown);
 
 
     }
@@ -55,22 +56,22 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
-    public void Sec(View v){
+    public void Sec(View v) {
         Intent intent = new Intent(".Anagrams");
         startActivity(intent);
 
     }
 
-    public void Two(View v){
+    public void Two(View v) {
         Intent intent = new Intent(".ForLess");
         startActivity(intent);
     }
+
     public void Tree(View v) {
-//        Intent intent = new Intent(".animation");
-//        startActivity(intent);
-//
-       Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
+        Intent intent = new Intent(".animation");
+        startActivity(intent);
+
+        //Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
 
 //        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
 //        Button btnTranslate = (Button) findViewById(R.id.treegame);
@@ -81,5 +82,11 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
-}
 
+
+    public void For(View v) {
+        Intent intent = new Intent(".Dropwords");
+        startActivity(intent);
+
+    }
+}

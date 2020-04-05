@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/forest"
+    tools:context=".Dropwords">
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/forlessbutton"
+        android:onClick="constr"
+        android:text="Старт"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/texx"
+        android:layout_width="191dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fields"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="415dp"
+        android:layout_height="538dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595">
+
+        <Button
+            android:id="@+id/pr2"
+            android:layout_width="50dp"
+            android:layout_height="39dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch2"
+            android:text="и"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.424" />
+
+        <Button
+            android:id="@+id/pr1"
+            android:layout_width="54dp"
+            android:layout_height="38dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch1"
+            android:text="б"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.032" />
+
+        <Button
+            android:id="@+id/pr5"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch5"
+            android:text="н"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.422" />
+
+        <Button
+            android:id="@+id/pr3"
+            android:layout_width="46dp"
+            android:layout_height="39dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch3"
+            android:text="з"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.881" />
+
+        <Button
+            android:id="@+id/pr4"
+            android:layout_width="46dp"
+            android:layout_height="41dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch4"
+            android:text="о"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.629" />
+
+        <Button
+            android:id="@+id/pr9"
+            android:layout_width="54dp"
+            android:layout_height="40dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch9"
+            android:text="б"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.763" />
+
+        <Button
+            android:id="@+id/pr8"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch8"
+            android:text="и"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.697"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.881" />
+
+        <Button
+            android:id="@+id/pr6"
+            android:layout_width="46dp"
+            android:layout_height="35dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch6"
+            android:text="з"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.58" />
+
+        <Button
+            android:id="@+id/pr7"
+            android:layout_width="48dp"
+            android:layout_height="41dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch7"
+            android:text="о"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.874"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.738" />
+
+        <Button
+            android:id="@+id/pr10"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:background="@drawable/forlessbutton"
+            android:onClick="Catch10"
+            android:text="н"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.921" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:background="@drawable/fields"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
