@@ -1,17 +1,16 @@
 <set android:ordering="sequentially"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
-
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="100sp"
-            android:valueTo="500sp"
+            android:duration="4500"
+            android:valueFrom="500sp"
+            android:valueTo="100sp"
             android:valueType="floatType"
             android:propertyName="y"
             android:repeatCount="3"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="4000"
+            android:duration="4500"
             android:valueFrom="350sp"
             android:valueTo="0sp"
             android:valueType="floatType"
