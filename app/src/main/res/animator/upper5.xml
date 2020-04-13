@@ -1,22 +1,22 @@
-<set android:ordering="sequentially"
+<set android:ordering="together"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
 
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="150sp"
-            android:valueTo="150sp"
+            android:duration="4300"
+            android:valueFrom="350"
+            android:valueTo="350"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="300sp"
-            android:valueTo="0sp"
+            android:duration="4300"
+            android:valueFrom="910"
+            android:valueTo="0"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
     <objectAnimator

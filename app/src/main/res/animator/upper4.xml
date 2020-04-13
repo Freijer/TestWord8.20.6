@@ -4,8 +4,8 @@
 
         <objectAnimator
             android:duration="4000"
-            android:valueFrom="100sp"
-            android:valueTo="500sp"
+            android:valueFrom="500sp"
+            android:valueTo="0sp"
             android:valueType="floatType"
             android:propertyName="y"
             android:repeatCount="3"
@@ -13,10 +13,10 @@
         <objectAnimator
             android:duration="4000"
             android:valueFrom="350sp"
-            android:valueTo="0sp"
+            android:valueTo="350sp"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
     <objectAnimator

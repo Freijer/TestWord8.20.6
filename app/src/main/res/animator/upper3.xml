@@ -1,10 +1,9 @@
 <set android:ordering="sequentially"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
-
         <objectAnimator
             android:duration="4000"
-            android:valueFrom="100sp"
+            android:valueFrom="0sp"
             android:valueTo="500sp"
             android:valueType="floatType"
             android:propertyName="y"
@@ -12,11 +11,11 @@
             android:repeatMode="reverse"/>
         <objectAnimator
             android:duration="4000"
-            android:valueFrom="350sp"
-            android:valueTo="0sp"
+            android:valueFrom="30sp"
+            android:valueTo="30sp"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
     <objectAnimator

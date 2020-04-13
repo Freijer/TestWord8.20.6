@@ -1,26 +1,21 @@
-<set android:ordering="sequentially"
+<set android:ordering="together"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
-
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="4000sp"
-            android:valueTo="4000sp"
+            android:duration="4200"
+            android:valueFrom="700"
+            android:valueTo="700"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="300sp"
-            android:valueTo="0sp"
+            android:duration="4200"
+            android:valueFrom="0"
+            android:valueTo="910"
             android:valueType="floatType"
-            android:propertyName="X"
-            android:repeatCount="3"
+            android:propertyName="x"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
-    <objectAnimator
-        android:propertyName="alpha"
-        android:duration="500"
-        android:valueTo="1f"/>
 </set>

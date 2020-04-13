@@ -3,20 +3,20 @@
     <set>
 
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="300sp"
-            android:valueTo="300sp"
+            android:duration="5500"
+            android:valueFrom="1300"
+            android:valueTo="1300"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="4000"
-            android:valueFrom="0sp"
-            android:valueTo="380sp"
+            android:duration="5500"
+            android:valueFrom="0"
+            android:valueTo="910"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
     <objectAnimator

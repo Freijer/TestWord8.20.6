@@ -11,12 +11,15 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -121,6 +124,17 @@ public class Dropwords extends AppCompatActivity {
             if (Key.equals(Control)) {
                 texx.setText("Молодец");
                 //texx.setText("Нет");
+                set1.end();
+                set2.end();
+                set3.end();
+                set4.end();
+                set5.end();
+                set6.end();
+                set7.end();
+                set8.end();
+                set9.end();
+                set10.end();
+
             }
             else {
                 texx.setText("НЭВЕРНО");
@@ -136,16 +150,17 @@ public class Dropwords extends AppCompatActivity {
     }
 
     public void SetStart(){
-        //set1.start();
-        //set2.start();
-//        set3.start();
-//        set4.start();
-        set5.start();
-//        set6.start();
-//        set7.start();
-//        set8.start();
-//        set9.start();
-        set10.start();
+       set1.start();
+       set2.start();
+       set3.start();
+       set4.start();
+       set5.start();
+       set6.start();
+       set7.start();
+       set8.start();
+       set9.start();
+       set10.start();
+
     }
 
     public void RandomGen(){
@@ -209,14 +224,14 @@ public class Dropwords extends AppCompatActivity {
 
         RandomGen();
         pr1.setText(String.valueOf(MixedleWord[0]));
-        pr2.setText(String.valueOf(MixedleWord[0]));
-        pr3.setText(String.valueOf(MixedleWord[1]));
-        pr4.setText(String.valueOf(MixedleWord[1]));
-        pr5.setText(String.valueOf(MixedleWord[2]));
-        pr6.setText(String.valueOf(MixedleWord[2]));
-        pr7.setText(String.valueOf(MixedleWord[3]));
-        pr8.setText(String.valueOf(MixedleWord[3]));
-        pr91.setText(String.valueOf(MixedleWord[4]));
+        pr2.setText(String.valueOf(MixedleWord[1]));
+        pr3.setText(String.valueOf(MixedleWord[2]));
+        pr4.setText(String.valueOf(MixedleWord[3]));
+        pr5.setText(String.valueOf(MixedleWord[4]));
+        pr6.setText(String.valueOf(MixedleWord[0]));
+        pr7.setText(String.valueOf(MixedleWord[1]));
+        pr8.setText(String.valueOf(MixedleWord[2]));
+        pr91.setText(String.valueOf(MixedleWord[3]));
         pr10.setText(String.valueOf(MixedleWord[4]));
 
 
@@ -231,53 +246,54 @@ public class Dropwords extends AppCompatActivity {
 //        animator1 = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.upper);
         set1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
         set2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper2); // лево У 100, с0
-        set3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх,     с 1
-        set4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ         с 1
-        set5 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper5); // право       с 2
+        set3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
+        set4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ   Х 350      с 1
+        set5 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper5); // право  У 150     с 2
         set6 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper6); // диавгональ, с 2
         set7 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper7); // лево У 300,  с3
-        set8 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper8); //верх          с3
-        set9 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper9); // низ       с4
-        set10 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper10); // право      с 4
+        set8 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper8); //верх  Х 225        с3
+        set9 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper9); // низ  Х 130     с4
+        set10 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper10); // право У 400     с 4
 
-//
-//        set10.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animation) {}
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-////                pr1.setVisibility(View.GONE);
-////                pr2.setVisibility(View.GONE);
-////                pr3.setVisibility(View.GONE);
-////                pr4.setVisibility(View.GONE);
-////                pr5.setVisibility(View.GONE);
-////                pr5.setVisibility(View.GONE);
-////                pr6.setVisibility(View.GONE);
-////                pr7.setVisibility(View.GONE);
-////                pr8.setVisibility(View.GONE);
-////                pr91.setVisibility(View.GONE);
-////                pr10.setVisibility(View.GONE);
-//            }
-//            @Override
-//            public void onAnimationCancel(Animator animation) {}
-//            @Override
-//            public void onAnimationRepeat(Animator animation) {}
-//        });
+        set9.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {}
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                pr1.setVisibility(View.GONE);
+                pr2.setVisibility(View.GONE);
+                pr3.setVisibility(View.GONE);
+                pr4.setVisibility(View.GONE);
+                pr5.setVisibility(View.GONE);
+                //pr5.setVisibility(View.GONE);
+                pr6.setVisibility(View.GONE);
+                pr7.setVisibility(View.GONE);
+                pr8.setVisibility(View.GONE);
+                pr91.setVisibility(View.GONE);
+                pr10.setVisibility(View.GONE);
+            }
+            @Override
+            public void onAnimationCancel(Animator animation) {}
+            @Override
+            public void onAnimationRepeat(Animator animation) {}
+        });
 
 
         //animator1.setTarget(pr1);
-        set1.setTarget(pr1);
-        set2.setTarget(pr2);
-        set3.setTarget(pr3);
-        set4.setTarget(pr4);
+//        set1.setTarget(pr1);
+//        set2.setTarget(pr2);
+//        set3.setTarget(pr3);
+//        set4.setTarget(pr4);
         set5.setTarget(pr5);
-        set6.setTarget(pr6);
-        set7.setTarget(pr7);
-        set8.setTarget(pr8);
-        set9.setTarget(pr91);
+//        set6.setTarget(pr6);
+//        set7.setTarget(pr7);
+//        set8.setTarget(pr8);
+//        set9.setTarget(pr91);
         set10.setTarget(pr10);
 
         SetStart();
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -337,7 +353,7 @@ public class Dropwords extends AppCompatActivity {
         Verify();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch9(View v){
+    public void Catch91(View v){
         ListWords.add(pr91.getText().toString());
         texx.setText(String.valueOf(ListWords));
         pr91.setEnabled(false);
