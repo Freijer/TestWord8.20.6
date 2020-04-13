@@ -1,7 +1,6 @@
 <set android:ordering="together"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
-
         <objectAnimator
             android:duration="4300"
             android:valueFrom="350"

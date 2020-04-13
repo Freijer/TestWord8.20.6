@@ -4,8 +4,8 @@
 
         <objectAnimator
             android:duration="5500"
-            android:valueFrom="1300"
-            android:valueTo="1300"
+            android:valueFrom="1500"
+            android:valueTo="1500"
             android:valueType="floatType"
             android:propertyName="y"
             android:repeatCount="4"

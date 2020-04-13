@@ -2,17 +2,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
         <objectAnimator
-            android:duration="5500"
-            android:valueFrom="500sp"
-            android:valueTo="50sp"
+            android:duration="5000"
+            android:valueFrom="1820"
+            android:valueTo="0"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="3"
+            android:repeatCount="4"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="5500"
-            android:valueFrom="350sp"
-            android:valueTo="0sp"
+            android:duration="5000"
+            android:valueFrom="0"
+            android:valueTo="910"
             android:valueType="floatType"
             android:propertyName="X"
             android:repeatCount="4"

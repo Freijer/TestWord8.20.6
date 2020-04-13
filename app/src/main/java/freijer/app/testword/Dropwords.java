@@ -160,7 +160,6 @@ public class Dropwords extends AppCompatActivity {
        set8.start();
        set9.start();
        set10.start();
-
     }
 
     public void RandomGen(){
@@ -265,7 +264,6 @@ public class Dropwords extends AppCompatActivity {
                 pr3.setVisibility(View.GONE);
                 pr4.setVisibility(View.GONE);
                 pr5.setVisibility(View.GONE);
-                //pr5.setVisibility(View.GONE);
                 pr6.setVisibility(View.GONE);
                 pr7.setVisibility(View.GONE);
                 pr8.setVisibility(View.GONE);
@@ -280,15 +278,15 @@ public class Dropwords extends AppCompatActivity {
 
 
         //animator1.setTarget(pr1);
-//        set1.setTarget(pr1);
-//        set2.setTarget(pr2);
-//        set3.setTarget(pr3);
-//        set4.setTarget(pr4);
+        set1.setTarget(pr1);
+        set2.setTarget(pr2);
+        set3.setTarget(pr3);
+        set4.setTarget(pr4);
         set5.setTarget(pr5);
-//        set6.setTarget(pr6);
-//        set7.setTarget(pr7);
-//        set8.setTarget(pr8);
-//        set9.setTarget(pr91);
+        set6.setTarget(pr6);
+        set7.setTarget(pr7);
+        set8.setTarget(pr8);
+        set9.setTarget(pr91);
         set10.setTarget(pr10);
 
         SetStart();
