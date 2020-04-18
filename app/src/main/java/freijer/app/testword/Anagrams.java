@@ -21,17 +21,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Anagrams extends AppCompatActivity {
 
-
-    Button B1, B2, B3, B4, B5, B6, start, check, reset;
-    TextView text, score;
-    String[] Original;
-    String[] OriginalWord; //бавзовое слово
-    String[] MixedleWord; //смешение
-    String Control;
+    private Button B1, B2, B3, B4, B5, B6, start, check, reset;
+    private TextView text, score;
+    private String[] Original;
+    private String[] OriginalWord; //бавзовое слово
+    private String[] MixedleWord; //смешение
+    String[] ReadWords; //массив считанный
+    private String Control;
     int count = 0;
+    private ArrayList<String> list;
+    private int indexWord;
+    private String word;
+    private Random r = new Random();
 
     public int getCount() {
         return count;
@@ -42,29 +47,39 @@ public class Anagrams extends AppCompatActivity {
 
     ArrayList<String> WordList_1 = new ArrayList<String>(6); // то, что вводит пользователь нажимая на кнопки
 
-    String[] ReadWords; //массив считанный
-    public void RandomGen(){
 
+    public void RandomGen(){
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("anagramlist.txt")));
             String str;
-            ArrayList<String> list = new ArrayList<String>();
+            this.list = new ArrayList<String>();
             while ((str = reader.readLine()) != null) {
                 if (!str.isEmpty()) {
                     list.add(str);
                 }
             }
-            this.ReadWords = list.toArray(new String[0]);
+//            this.ReadWords = list.toArray(new String[0]);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
 
-        String[] stringArr = ReadWords;
-        int oneLength = stringArr.length;
-        int rand1 = (int) (Math.random() * oneLength);
-        String RandomWord = stringArr[rand1];
-        this.Original = RandomWord.split("");//разбив по буквам
+    public void RandomShuffleWord(){
+
+        if (!list.isEmpty()) {
+            this.indexWord = r.nextInt(list.size());
+
+            this.word = list.get(indexWord);
+            list.remove(word);
+
+        } else if (list.isEmpty()) {
+            this.word = "конецц";
+            text.setText("Финал");
+            //RandomGen(); - заново
+        }
+
+        this.Original = this.word.split("");//разбив по буквам
         List<String> list = new ArrayList<String>(Arrays.asList(Original));
         System.out.println(list);
         list.removeAll(Arrays.asList("", null));
@@ -75,11 +90,13 @@ public class Anagrams extends AppCompatActivity {
         Collections.shuffle(shuffle);
         shuffle.toArray(Literals);
         this.MixedleWord = Literals;
-        this.Control = RandomWord;
+        //this.Control = RandomWord;
+        this.Control = this.word;
+
     }
 
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anagrams);
@@ -95,7 +112,8 @@ public class Anagrams extends AppCompatActivity {
         reset = (Button)findViewById(R.id.reset);
         text = (TextView)findViewById(R.id.text1);
         score = (TextView)findViewById(R.id.score);
-            Next();
+        RandomGen();
+        Next();
     }
 
     public void LetsStart(){
@@ -112,13 +130,15 @@ public class Anagrams extends AppCompatActivity {
         B4.setEnabled(true);
         B5.setEnabled(true);
         B6.setEnabled(true);
-        RandomGen();
+        RandomShuffleWord();
         B1.setText(String.valueOf(MixedleWord[0]));
         B2.setText(String.valueOf(MixedleWord[1]));
         B3.setText(String.valueOf(MixedleWord[2]));
         B4.setText(String.valueOf(MixedleWord[3]));
         B5.setText(String.valueOf(MixedleWord[4]));
         B6.setText(String.valueOf(MixedleWord[5]));
+
+
         check.setEnabled(true);
         //text.setText(ReadWords[0]);
     }
@@ -240,4 +260,3 @@ public class Anagrams extends AppCompatActivity {
     }
 
 }
-

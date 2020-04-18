@@ -8,6 +8,54 @@
     tools:context=".Dropwords">
 
     <Button
+        android:id="@+id/shw2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/forlessbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <Button
+        android:id="@+id/shw3"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/forlessbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <Button
+        android:id="@+id/shw1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/forlessbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <Button
+        android:id="@+id/shw5"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/forlessbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <Button
         android:id="@+id/pr5"
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -163,8 +211,8 @@
 
     <TextView
         android:id="@+id/texx"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
         android:background="@drawable/fields"
         android:gravity="center"
         android:includeFontPadding="false"
@@ -172,10 +220,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.995" />
 
     <TextView
         android:id="@+id/score"
@@ -187,10 +235,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.984"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <Button
         android:id="@+id/reset"
@@ -205,5 +253,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.996" />
+
+    <Button
+        android:id="@+id/shw4"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/forlessbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

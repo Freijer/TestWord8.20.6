@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     Button anagrams, twogame, treegame, wordDown;
     TextView TER;
     String[] stringArr;
+    String[] addresses = new String[]{"skydreamfest@mail.ru"};
+    String subject;
+    String emailText;
 
 
     @Override
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         treegame = (Button) findViewById(R.id.treegame);
         wordDown = (Button) findViewById(R.id.wordDown);
 
+        this.subject = "Тестовое письмо";
+        this.emailText = "Привет, Виктор! Число 300";
+
 
     }
 //    public void Ani(View view){
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Sec(View v) {
-        Intent intent = new Intent(".Anagrams");
+        Intent intent = new Intent(".Wordscollect");
         startActivity(intent);
 
     }
@@ -68,25 +75,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Tree(View v) {
-        Intent intent = new Intent(".animation");
-        startActivity(intent);
-
-        //Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
-
-//        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
-//        Button btnTranslate = (Button) findViewById(R.id.treegame);
-//        btnTranslate.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                view.startAnimation(animTranslate);
-//            }
-//        });
+//        Intent intent = new Intent(".Wordscollect");
+//        startActivity(intent);
+        Toast toast = Toast.makeText(getApplicationContext(), "В разработке. Подождите =)", Toast.LENGTH_SHORT); toast.show();
     }
 
 
     public void For(View v) {
         Intent intent = new Intent(".Dropwords");
         startActivity(intent);
-
     }
+
+    public void EmailSend(View v){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailText);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void Test(View v) {
+        Intent intent = new Intent(".animation");
+        startActivity(intent);
+    }
+
+
 }

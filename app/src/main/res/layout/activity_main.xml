@@ -15,9 +15,9 @@
         android:id="@+id/anagrams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="250sp"
-        android:layout_marginRight="100sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/buttonfields"
         android:onClick="Sec"
         android:text="Анаграммы" />
@@ -26,9 +26,9 @@
         android:id="@+id/treegame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="9sp"
-        android:layout_marginRight="100sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/buttonfields"
         android:onClick="Two"
         android:text="Четвертый лишний" />
@@ -37,9 +37,9 @@
         android:id="@+id/twogame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="45sp"
-        android:layout_marginRight="100sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/buttonfields"
         android:onClick="Tree"
         android:text="Охота на зоби" />
@@ -48,11 +48,33 @@
         android:id="@+id/wordDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="9sp"
-        android:layout_marginRight="100sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/buttonfields"
         android:onClick="For"
         android:text="Словопадения" />
+
+    <Button
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="100sp"
+        android:background="@drawable/buttonfields"
+        android:onClick="EmailSend"
+        android:text="Отправить почту" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="100sp"
+        android:background="@drawable/buttonfields"
+        android:onClick="Test"
+        android:text="тест экран" />
 
 </LinearLayout>

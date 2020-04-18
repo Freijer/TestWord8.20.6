@@ -39,6 +39,7 @@ public class Dropwords extends AppCompatActivity {
 
 
     protected Button start, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr91, pr10, reset;
+    protected Button shw1, shw2, shw3, shw4, shw5;
     protected TextView texx, score;
     protected ArrayList<String> ListWords = new ArrayList<String>();
 
@@ -58,6 +59,12 @@ public class Dropwords extends AppCompatActivity {
     protected AnimatorSet set8;
     protected AnimatorSet set9;
     protected AnimatorSet set10;
+    //--
+    protected AnimatorSet sh1;
+    protected ObjectAnimator sh2;
+//    protected AnimatorSet sh3;
+//    protected AnimatorSet sh4;
+//    protected AnimatorSet sh5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,13 @@ public class Dropwords extends AppCompatActivity {
         pr8 = (Button)findViewById(R.id.pr8);
         pr91 = (Button)findViewById(R.id.pr91);
         pr10 = (Button)findViewById(R.id.pr10);
+        //--
+        shw1 = findViewById(R.id.shw1);
+        shw2 = findViewById(R.id.shw2);
+        shw3 = findViewById(R.id.shw3);
+        shw4 = findViewById(R.id.shw4);
+        shw5 = findViewById(R.id.shw5);
+
 
         reset.setVisibility(View.GONE);
 
@@ -91,6 +105,13 @@ public class Dropwords extends AppCompatActivity {
         pr8.setVisibility(View.GONE);
         pr91.setVisibility(View.GONE);
         pr10.setVisibility(View.GONE);
+        //--
+        shw1.setVisibility(View.GONE);
+        shw2.setVisibility(View.GONE);
+//        shw3.setVisibility(View.GONE);
+//        shw4.setVisibility(View.GONE);
+//        shw5.setVisibility(View.GONE);
+
 
     }
 
@@ -276,22 +297,41 @@ public class Dropwords extends AppCompatActivity {
             public void onAnimationRepeat(Animator animation) {}
         });
 
+            sh1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.showleft);
+//        sh1 = ObjectAnimator.ofFloat(shw1, "X", 250);
+//        sh1.setDuration(4000);
+
+        sh2 = ObjectAnimator.ofFloat(shw2, "x", 250);
+        sh2.setDuration(2500);
+
+        //shw1.setVisibility(View.VISIBLE);
+
+
+
 
         //animator1.setTarget(pr1);
         set1.setTarget(pr1);
         set2.setTarget(pr2);
-        set3.setTarget(pr3);
-        set4.setTarget(pr4);
-        set5.setTarget(pr5);
-        set6.setTarget(pr6);
-        set7.setTarget(pr7);
-        set8.setTarget(pr8);
-        set9.setTarget(pr91);
-        set10.setTarget(pr10);
-
+//        set3.setTarget(pr3);
+//        set4.setTarget(pr4);
+//        set5.setTarget(pr5);
+//        set6.setTarget(pr6);
+//        set7.setTarget(pr7);
+//        set8.setTarget(pr8);
+//        set9.setTarget(pr91);
+//        set10.setTarget(pr10);
+        sh1.setTarget(shw1);
+        sh2.setTarget(shw2);
+        //sh1.start();
         SetStart();
+       // shw1.setVisibility(View.VISIBLE);
 
+    }
 
+    public void Startsh1(){
+        shw1.setText(pr1.getText().toString());
+        sh1.start();
+        shw1.setVisibility(View.VISIBLE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -300,12 +340,19 @@ public class Dropwords extends AppCompatActivity {
        texx.setText(String.valueOf(ListWords));
         pr1.setEnabled(false);
         Verify();
+        Startsh1();
+
+
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Catch2(View v){
         ListWords.add(pr2.getText().toString());
         texx.setText(String.valueOf(ListWords));
         pr2.setEnabled(false);
+
+        shw2.setText(pr2.getText().toString());
+        shw2.setVisibility(View.VISIBLE);
+        sh2.start();
         Verify();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
