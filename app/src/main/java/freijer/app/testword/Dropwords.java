@@ -37,19 +37,17 @@ public class Dropwords extends AppCompatActivity {
        //ObjectAnimator - ждя 1 параметра в xml
 
 
-    protected int status1 = 0;
-    protected int status2 = 0;
-
     protected Button start, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr91, pr10, reset;
-    protected Button shw1, shw2, shw3, shw4, shw5;
-    protected TextView texx, score;
+    protected int flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag8, flag91, flag10 = 0;
     protected ArrayList<String> ListWords = new ArrayList<String>();
+    protected ArrayList<Integer> ListCoordinateX = new ArrayList<Integer>();
 
     protected String[] Original;
     protected String[] OriginalWord; //бавзовое слово
     protected String[] MixedleWord; //смешение
     protected String[] ReadWords; //Массив из файла
     protected String Control;
+
 
     protected AnimatorSet set1;
     protected AnimatorSet set2;
@@ -61,19 +59,12 @@ public class Dropwords extends AppCompatActivity {
     protected AnimatorSet set8;
     protected AnimatorSet set9;
     protected AnimatorSet set10;
-    //--
-    protected ObjectAnimator sh1;
-    protected ObjectAnimator sh2;
-//    protected AnimatorSet sh3;
-//    protected AnimatorSet sh4;
-//    protected AnimatorSet sh5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dropwords);
 
-        texx = (TextView)findViewById(R.id.texx);
         start = (Button)findViewById(R.id.start);
         reset = (Button)findViewById(R.id.reset);
         pr1 = (Button)findViewById(R.id.pr1);
@@ -86,44 +77,77 @@ public class Dropwords extends AppCompatActivity {
         pr8 = (Button)findViewById(R.id.pr8);
         pr91 = (Button)findViewById(R.id.pr91);
         pr10 = (Button)findViewById(R.id.pr10);
-        //--
-        shw1 = findViewById(R.id.shw1);
-        shw2 = findViewById(R.id.shw2);
-        shw3 = findViewById(R.id.shw3);
-        shw4 = findViewById(R.id.shw4);
-        shw5 = findViewById(R.id.shw5);
-
-
         reset.setVisibility(View.GONE);
+        ListXUpFull();
 
-        pr1.setVisibility(View.GONE);
-        pr2.setVisibility(View.GONE);
-        pr3.setVisibility(View.GONE);
-        pr4.setVisibility(View.GONE);
-        pr5.setVisibility(View.GONE);
-        pr5.setVisibility(View.GONE);
-        pr6.setVisibility(View.GONE);
-        pr7.setVisibility(View.GONE);
-        pr8.setVisibility(View.GONE);
-        pr91.setVisibility(View.GONE);
-        pr10.setVisibility(View.GONE);
-        //--
-        shw1.setVisibility(View.GONE);
-        shw2.setVisibility(View.GONE);
-//        shw3.setVisibility(View.GONE);
-//        shw4.setVisibility(View.GONE);
-//        shw5.setVisibility(View.GONE);
-
-
+        ButtonsGome();
     }
 
-
+    public void ButtonsGome(){
+        if (flag1==0){
+            pr1.setVisibility(View.GONE);
+        } else if(flag1==1){
+            pr1.setVisibility(View.VISIBLE);
+        }
+        if (flag2==0){
+            pr2.setVisibility(View.GONE);
+        } else if(flag2==1){
+            pr2.setVisibility(View.VISIBLE);
+        }
+        if (flag3==0){
+            pr3.setVisibility(View.GONE);
+        } else if(flag3==1){
+            pr3.setVisibility(View.VISIBLE);
+        }
+        if (flag4==0){
+            pr4.setVisibility(View.GONE);
+        } else if(flag4==1){
+            pr4.setVisibility(View.VISIBLE);
+        }
+        if (flag5==0){
+            pr5.setVisibility(View.GONE);
+        } else if(flag5==1){
+            pr5.setVisibility(View.VISIBLE);
+        }
+        if (flag6==0){
+            pr6.setVisibility(View.GONE);
+        } else if(flag6==1){
+            pr6.setVisibility(View.VISIBLE);
+        }
+        if (flag7==0){
+            pr7.setVisibility(View.GONE);
+        } else if(flag7==1){
+            pr7.setVisibility(View.VISIBLE);
+        }
+        if (flag8==0){
+            pr8.setVisibility(View.GONE);
+        } else if(flag8==1){
+            pr8.setVisibility(View.VISIBLE);
+        }
+        if (flag91==0){
+            pr91.setVisibility(View.GONE);
+        } else if(flag91==1){
+            pr91.setVisibility(View.VISIBLE);
+        }
+        if (flag10==0){
+            pr10.setVisibility(View.GONE);
+        } else if(flag10==1){
+            pr10.setVisibility(View.VISIBLE);
+        }
+    }
+    public void ListXUpFull(){
+        ListCoordinateX.add(50);
+        ListCoordinateX.add(220);
+        ListCoordinateX.add(390);
+        ListCoordinateX.add(560);
+        ListCoordinateX.add(730);
+        ListCoordinateX.add(900);
+    }
     public void Reset(View v){
         start.setVisibility(View.VISIBLE);
         reset.setVisibility(View.GONE);
         ListWords.clear();
-        texx.setText("");
-
+        //texx.setText("");
         //animator1.end();
         set1.end();
         set2.end();
@@ -135,8 +159,10 @@ public class Dropwords extends AppCompatActivity {
         set8.end();
         set9.end();
         set10.end();
-    }
+        ButtonsGome();
 
+        ListCoordinateX.removeAll(ListCoordinateX);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Verify() {
@@ -145,7 +171,8 @@ public class Dropwords extends AppCompatActivity {
         String Key = (String.join("", array));
         if (Integer.valueOf(ListWords.size()) == 5) {
             if (Key.equals(Control)) {
-                texx.setText("Молодец");
+               // score.setText(""+getCount());
+                //texx.setText("Молодец");
                 //texx.setText("Нет");
                 set1.end();
                 set2.end();
@@ -157,10 +184,10 @@ public class Dropwords extends AppCompatActivity {
                 set8.end();
                 set9.end();
                 set10.end();
-
+                ButtonsGome();
+                SetFlag();
             }
             else {
-                texx.setText("НЭВЕРНО");
             }
         }
     }
@@ -170,6 +197,22 @@ public class Dropwords extends AppCompatActivity {
        reset.setVisibility(View.VISIBLE);
        start.setVisibility(View.GONE);
         SetStart();
+        ListXUpFull();
+        SetFlag();
+
+    }
+
+    public void SetFlag(){
+          flag1=0;
+          flag2=0;
+          flag3=0;
+          flag4=0;
+          flag5=0;
+          flag6=0;
+          flag7=0;
+          flag8=0;
+          flag91=0;
+          flag10 = 0;
     }
 
     public void SetStart(){
@@ -261,11 +304,6 @@ public class Dropwords extends AppCompatActivity {
 
     public void Gos(){  // анимацимя основной модуль
         SetTextOnButtons();
-//        pr1.animate().translationYBy(-5000).setDuration(13000);
-//        ObjectAnimator moveAnimatorY = ObjectAnimator.ofFloat(pr1, "y", -5000);
-//        moveAnimatorY.setDuration(13000);
-//        moveAnimatorY.start();
-//        animator1 = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.upper);
         set1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
         set2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper2); // лево У 100, с0
         set3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
@@ -282,161 +320,192 @@ public class Dropwords extends AppCompatActivity {
             public void onAnimationStart(Animator animation) {}
             @Override
             public void onAnimationEnd(Animator animation) {
-                pr1.setVisibility(View.GONE);
-                pr2.setVisibility(View.GONE);
-                pr3.setVisibility(View.GONE);
-                pr4.setVisibility(View.GONE);
-                pr5.setVisibility(View.GONE);
-                pr6.setVisibility(View.GONE);
-                pr7.setVisibility(View.GONE);
-                pr8.setVisibility(View.GONE);
-                pr91.setVisibility(View.GONE);
-                pr10.setVisibility(View.GONE);
-            }
+              //  ButtonsGome();
+            } // окончсание и пропадание кнопок
             @Override
             public void onAnimationCancel(Animator animation) {}
             @Override
             public void onAnimationRepeat(Animator animation) {}
         });
 
-            //sh1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.showleft);
-//        sh1 = ObjectAnimator.ofFloat(shw1, "X", 250);
-//        sh1.setDuration(4000);
-//
-//        sh2 = ObjectAnimator.ofFloat(shw2, "x", 250);
-//        sh2.setDuration(2500);
-
-        //shw1.setVisibility(View.VISIBLE);
-
-
-
-
-        //animator1.setTarget(pr1);
         set1.setTarget(pr1);
         set2.setTarget(pr2);
-//        set3.setTarget(pr3);
-//        set4.setTarget(pr4);
-//        set5.setTarget(pr5);
-//        set6.setTarget(pr6);
-//        set7.setTarget(pr7);
-//        set8.setTarget(pr8);
-//        set9.setTarget(pr91);
-//        set10.setTarget(pr10);
-//        sh1.setTarget(shw1);
-//        sh2.setTarget(shw2);
-        //sh1.start();
+        set3.setTarget(pr3);
+        set4.setTarget(pr4);
+        set5.setTarget(pr5);
+        set6.setTarget(pr6);
+        set7.setTarget(pr7);
+        set8.setTarget(pr8);
+        set9.setTarget(pr91);
+        set10.setTarget(pr10);
         SetStart();
-       // shw1.setVisibility(View.VISIBLE);
 
     }
-
-    public void Startsh1(){
-        shw1.setText(pr1.getText().toString());
-        //sh1.start();
-        shw1.setVisibility(View.VISIBLE);
-
-        if(this.status1==0) {
-            shw1.animate().translationY(50f).translationX(20f).setDuration(4000);
-            this.status1=1;
-        } else if(this.status1==1){
-            shw1.animate().translationY(50f).translationX(50f).setDuration(4000);
-            this.status1 = 2;
-        }
-    }
-
-    public void Startsh2(){
-        shw2.setText(pr2.getText().toString());
-        shw2.setVisibility(View.VISIBLE);
-        //sh2.start();
-        if(this.status1==0) {
-            shw2.animate().translationY(50f).translationX(20f).setDuration(4000);
-            this.status1=1;
-        } else if(this.status1==1){
-            shw2.animate().translationY(50f).translationX(50f).setDuration(4000);
-            this.status1 = 2;
-        }
-    }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Catch1(View v){
        ListWords.add(pr1.getText().toString());
-       texx.setText(String.valueOf(ListWords));
         pr1.setEnabled(false);
-        Startsh1();
-        Verify();
-
-
-
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch2(View v){
-        ListWords.add(pr2.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr2.setEnabled(false);
-
-        Startsh2();
+        set1.end();
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(pr1, "x", ListCoordinateX.get(0) );
+        ObjectAnimator moveY = ObjectAnimator.ofFloat(pr1, "y", 60 );
+        AnimatorSet as1 = new AnimatorSet();
+        as1.playTogether(moveX, moveY);
+        as1.setDuration(4000);
+        as1.start();
+        ListCoordinateX.remove(0);
+        flag1 = 1;
 
         Verify();
+    }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void Catch2(View v){
+            ListWords.add(pr2.getText().toString());
+           // texx.setText(String.valueOf(ListWords));
+            pr2.setEnabled(false);
+            //Startsh2();
+            //AnimBut2();
+            set2.end();
+            ObjectAnimator moveX = ObjectAnimator.ofFloat(pr2, "x", ListCoordinateX.get(0) );
+            ObjectAnimator moveY = ObjectAnimator.ofFloat(pr2, "y", 60 );
+            AnimatorSet as2 = new AnimatorSet();
+            as2.playTogether(moveX, moveY);
+            as2.setDuration(4000);
+            as2.start();
+            ListCoordinateX.remove(0);
+            flag2 = 1;
+            Verify();
+        }
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void Catch3(View v){
+                ListWords.add(pr3.getText().toString());
+               // texx.setText(String.valueOf(ListWords));
+                pr3.setEnabled(false);
+                set3.end();
+                ObjectAnimator moveX = ObjectAnimator.ofFloat(pr3, "x", ListCoordinateX.get(0) );
+                ObjectAnimator moveY = ObjectAnimator.ofFloat(pr3, "y", 60 );
+                AnimatorSet as3 = new AnimatorSet();
+                as3.playTogether(moveX, moveY);
+                as3.setDuration(4000);
+                as3.start();
+                ListCoordinateX.remove(0);
+                flag3 = 1;
 
+                Verify();
+            }
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                public void Catch4(View v){
+                    ListWords.add(pr4.getText().toString());
+                    //texx.setText(String.valueOf(ListWords));
+                    pr4.setEnabled(false);
+                    set4.end();
+                    ObjectAnimator moveX = ObjectAnimator.ofFloat(pr4, "x", ListCoordinateX.get(0) );
+                    ObjectAnimator moveY = ObjectAnimator.ofFloat(pr4, "y", 60 );
+                    AnimatorSet as4 = new AnimatorSet();
+                    as4.playTogether(moveX, moveY);
+                    as4.setDuration(4000);
+                    as4.start();
+                    ListCoordinateX.remove(0);
+                    flag4 = 1;
 
+                    Verify();
+                }
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                public void Catch5(View v){
+                    ListWords.add(pr5.getText().toString());
+                   // texx.setText(String.valueOf(ListWords));
+                    pr5.setEnabled(false);
+                    set5.end();
+                    ObjectAnimator moveX = ObjectAnimator.ofFloat(pr5, "x", ListCoordinateX.get(0) );
+                    ObjectAnimator moveY = ObjectAnimator.ofFloat(pr5, "y", 60 );
+                    AnimatorSet as5 = new AnimatorSet();
+                    as5.playTogether(moveX, moveY);
+                    as5.setDuration(4000);
+                    as5.start();
+                    ListCoordinateX.remove(0);
+                    flag5 = 1;
 
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch3(View v){
-        ListWords.add(pr3.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr3.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch4(View v){
-        ListWords.add(pr4.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr4.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch5(View v){
-        ListWords.add(pr5.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr5.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch6(View v){
-        ListWords.add(pr6.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr6.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch7(View v){
-        ListWords.add(pr7.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr7.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch8(View v){
-        ListWords.add(pr8.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr8.setEnabled(false);
-        Verify();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Catch91(View v){
-        ListWords.add(pr91.getText().toString());
-        texx.setText(String.valueOf(ListWords));
-        pr91.setEnabled(false);
-        Verify();
-    }
+                    Verify();
+                }
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    public void Catch6(View v){
+                ListWords.add(pr6.getText().toString());
+                //texx.setText(String.valueOf(ListWords));
+                pr6.setEnabled(false);
+                set6.end();
+                ObjectAnimator moveX = ObjectAnimator.ofFloat(pr6, "x", ListCoordinateX.get(0) );
+                ObjectAnimator moveY = ObjectAnimator.ofFloat(pr6, "y", 60 );
+                AnimatorSet as6 = new AnimatorSet();
+                as6.playTogether(moveX, moveY);
+                as6.setDuration(4000);
+                as6.start();
+                ListCoordinateX.remove(0);
+                flag6 = 1;
+
+                Verify();
+            }
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                public void Catch7(View v){
+                    ListWords.add(pr7.getText().toString());
+                    //texx.setText(String.valueOf(ListWords));
+                    pr7.setEnabled(false);
+                    set7.end();
+                    ObjectAnimator moveX = ObjectAnimator.ofFloat(pr7, "x", ListCoordinateX.get(0) );
+                    ObjectAnimator moveY = ObjectAnimator.ofFloat(pr7, "y", 60 );
+                    AnimatorSet as7 = new AnimatorSet();
+                    as7.playTogether(moveX, moveY);
+                    as7.setDuration(4000);
+                    as7.start();
+                    ListCoordinateX.remove(0);
+                    flag7 = 1;
+                    Verify();
+                }
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void Catch8(View v){
+                ListWords.add(pr8.getText().toString());
+                pr8.setEnabled(false);
+                set8.end();
+                ObjectAnimator moveX = ObjectAnimator.ofFloat(pr8, "x", ListCoordinateX.get(0) );
+                ObjectAnimator moveY = ObjectAnimator.ofFloat(pr8, "y", 60 );
+                AnimatorSet as8 = new AnimatorSet();
+                as8.playTogether(moveX, moveY);
+                as8.setDuration(4000);
+                as8.start();
+                ListCoordinateX.remove(0);
+                flag8 = 1;
+
+                Verify();
+            }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void Catch91(View v){
+            ListWords.add(pr91.getText().toString());
+            pr91.setEnabled(false);
+            set9.end();
+            ObjectAnimator moveX = ObjectAnimator.ofFloat(pr91, "x", ListCoordinateX.get(0) );
+            ObjectAnimator moveY = ObjectAnimator.ofFloat(pr91, "y", 60 );
+            AnimatorSet as91 = new AnimatorSet();
+            as91.playTogether(moveX, moveY);
+            as91.setDuration(4000);
+            as91.start();
+            ListCoordinateX.remove(0);
+            flag91 = 1;
+
+            Verify();
+        }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Catch10(View v){
         ListWords.add(pr10.getText().toString());
-        texx.setText(String.valueOf(ListWords));
         pr10.setEnabled(false);
+        set10.end();
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(pr10, "x", ListCoordinateX.get(0) );
+        ObjectAnimator moveY = ObjectAnimator.ofFloat(pr10, "y", 60 );
+        AnimatorSet as10 = new AnimatorSet();
+        as10.playTogether(moveX, moveY);
+        as10.setDuration(4000);
+        as10.start();
+        ListCoordinateX.remove(0);
+        flag10 = 1;
+
         Verify();
     }
 }
