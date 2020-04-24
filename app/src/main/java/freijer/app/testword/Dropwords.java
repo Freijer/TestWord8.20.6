@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Dropwords extends AppCompatActivity {
 
@@ -37,17 +38,24 @@ public class Dropwords extends AppCompatActivity {
        //ObjectAnimator - ждя 1 параметра в xml
 
 
-    protected Button start, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr91, pr10, reset;
+    protected Button start, reset, pr1, pr2, pr3, pr4, pr5;
+    protected Button pr6, pr7, pr8, pr91, pr10;
+    protected TextView  score;
     protected int flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag8, flag91, flag10 = 0;
     protected ArrayList<String> ListWords = new ArrayList<String>();
     protected ArrayList<Integer> ListCoordinateX = new ArrayList<Integer>();
+
+    private ArrayList<String> list;
+    private int indexWord;
+    private String word;
+    private Random r = new Random();
+    protected int counter;
 
     protected String[] Original;
     protected String[] OriginalWord; //бавзовое слово
     protected String[] MixedleWord; //смешение
     protected String[] ReadWords; //Массив из файла
     protected String Control;
-
 
     protected AnimatorSet set1;
     protected AnimatorSet set2;
@@ -65,6 +73,7 @@ public class Dropwords extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dropwords);
 
+        score = findViewById(R.id.score);
         start = (Button)findViewById(R.id.start);
         reset = (Button)findViewById(R.id.reset);
         pr1 = (Button)findViewById(R.id.pr1);
@@ -78,12 +87,66 @@ public class Dropwords extends AppCompatActivity {
         pr91 = (Button)findViewById(R.id.pr91);
         pr10 = (Button)findViewById(R.id.pr10);
         reset.setVisibility(View.GONE);
-        ListXUpFull();
 
+        RandomShuffleWord();
+        ListXUpFull();
         ButtonsGome();
+        pr6.setVisibility(View.GONE);
+        pr7.setVisibility(View.GONE);
+        pr8.setVisibility(View.GONE);
+        pr91.setVisibility(View.GONE);
+        pr10.setVisibility(View.GONE);
+
+
+    }
+
+    public void RandomShuffleWord(){
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dropwordlist.txt")));
+            String str;
+            this.list = new ArrayList<String>();
+            while ((str = reader.readLine()) != null) {
+                if (!str.isEmpty()) {
+                    list.add(str);
+                }
+            }
+//            this.ReadWords = list.toArray(new String[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        }
+
+    public void RandomGen(){
+
+        if (!list.isEmpty()) {
+            this.indexWord = r.nextInt(list.size());
+
+            this.word = list.get(indexWord);
+            list.remove(word);
+
+        } else if (list.isEmpty()) {
+            this.word = "конец";
+            RandomGen();
+        }
+
+        this.Original = this.word.split("");//разбив по буквам
+        List<String> list = new ArrayList<String>(Arrays.asList(Original));
+        System.out.println(list);
+        list.removeAll(Arrays.asList("", null));
+        System.out.println(list);
+        this.OriginalWord = list.toArray(new String[0]);
+        String[] Literals = OriginalWord;
+        List<String> shuffle = Arrays.asList(Literals);
+        Collections.shuffle(shuffle);
+        shuffle.toArray(Literals);
+        this.MixedleWord = Literals;
+        this.Control = this.word;
     }
 
     public void ButtonsGome(){
+
         if (flag1==0){
             pr1.setVisibility(View.GONE);
         } else if(flag1==1){
@@ -109,31 +172,31 @@ public class Dropwords extends AppCompatActivity {
         } else if(flag5==1){
             pr5.setVisibility(View.VISIBLE);
         }
-        if (flag6==0){
-            pr6.setVisibility(View.GONE);
-        } else if(flag6==1){
-            pr6.setVisibility(View.VISIBLE);
-        }
-        if (flag7==0){
-            pr7.setVisibility(View.GONE);
-        } else if(flag7==1){
-            pr7.setVisibility(View.VISIBLE);
-        }
-        if (flag8==0){
-            pr8.setVisibility(View.GONE);
-        } else if(flag8==1){
-            pr8.setVisibility(View.VISIBLE);
-        }
-        if (flag91==0){
-            pr91.setVisibility(View.GONE);
-        } else if(flag91==1){
-            pr91.setVisibility(View.VISIBLE);
-        }
-        if (flag10==0){
-            pr10.setVisibility(View.GONE);
-        } else if(flag10==1){
-            pr10.setVisibility(View.VISIBLE);
-        }
+//        if (flag6==0){
+//            pr6.setVisibility(View.GONE);
+//        } else if(flag6==1){
+//            pr6.setVisibility(View.VISIBLE);
+//        }
+//        if (flag7==0){
+//            pr7.setVisibility(View.GONE);
+//        } else if(flag7==1){
+//            pr7.setVisibility(View.VISIBLE);
+//        }
+//        if (flag8==0){
+//            pr8.setVisibility(View.GONE);
+//        } else if(flag8==1){
+//            pr8.setVisibility(View.VISIBLE);
+//        }
+//        if (flag91==0){
+//            pr91.setVisibility(View.GONE);
+//        } else if(flag91==1){
+//            pr91.setVisibility(View.VISIBLE);
+//        }
+//        if (flag10==0){
+//            pr10.setVisibility(View.GONE);
+//        } else if(flag10==1){
+//            pr10.setVisibility(View.VISIBLE);
+//        }
     }
     public void ListXUpFull(){
         ListCoordinateX.add(50);
@@ -154,11 +217,11 @@ public class Dropwords extends AppCompatActivity {
         set3.end();
         set4.end();
         set5.end();
-        set6.end();
-        set7.end();
-        set8.end();
-        set9.end();
-        set10.end();
+//        set6.end();
+//        set7.end();
+//        set8.end();
+//        set9.end();
+//        set10.end();
         ButtonsGome();
 
         ListCoordinateX.removeAll(ListCoordinateX);
@@ -171,23 +234,26 @@ public class Dropwords extends AppCompatActivity {
         String Key = (String.join("", array));
         if (Integer.valueOf(ListWords.size()) == 5) {
             if (Key.equals(Control)) {
-               // score.setText(""+getCount());
-                //texx.setText("Молодец");
-                //texx.setText("Нет");
                 set1.end();
                 set2.end();
                 set3.end();
                 set4.end();
                 set5.end();
-                set6.end();
-                set7.end();
-                set8.end();
-                set9.end();
-                set10.end();
+//                set6.end();
+//                set7.end();
+//                set8.end();
+//                set9.end();
+//                set10.end();
                 ButtonsGome();
                 SetFlag();
+                this.counter++;
+                score.setText(""+this.counter);
+                score.setTextColor(Color.BLUE);
             }
             else {
+                this.counter--;
+                score.setText(""+this.counter);
+                score.setTextColor(Color.RED);
             }
         }
     }
@@ -199,7 +265,6 @@ public class Dropwords extends AppCompatActivity {
         SetStart();
         ListXUpFull();
         SetFlag();
-
     }
 
     public void SetFlag(){
@@ -208,11 +273,11 @@ public class Dropwords extends AppCompatActivity {
           flag3=0;
           flag4=0;
           flag5=0;
-          flag6=0;
-          flag7=0;
-          flag8=0;
-          flag91=0;
-          flag10 = 0;
+//          flag6=0;
+//          flag7=0;
+//          flag8=0;
+//          flag91=0;
+//          flag10 = 0;
     }
 
     public void SetStart(){
@@ -221,45 +286,11 @@ public class Dropwords extends AppCompatActivity {
        set3.start();
        set4.start();
        set5.start();
-       set6.start();
-       set7.start();
-       set8.start();
-       set9.start();
-       set10.start();
-    }
-
-    public void RandomGen(){
-
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dropwordlist.txt")));
-            String str;
-            ArrayList<String> list = new ArrayList<String>();
-            while ((str = reader.readLine()) != null) {
-                if (!str.isEmpty()) {
-                    list.add(str);
-                }
-            }
-            this.ReadWords = list.toArray(new String[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String[] stringArr = ReadWords;
-        int oneLength = stringArr.length;
-        int rand1 = (int) (Math.random() * oneLength);
-        String RandomWord = stringArr[rand1];
-        this.Original = RandomWord.split("");//разбив по буквам
-        List<String> list = new ArrayList<String>(Arrays.asList(Original));
-        System.out.println(list);
-        list.removeAll(Arrays.asList("", null));
-        System.out.println(list);
-        this.OriginalWord = list.toArray(new String[0]);
-        String[] Literals = OriginalWord;
-        List<String> shuffle = Arrays.asList(Literals);
-        Collections.shuffle(shuffle);
-        shuffle.toArray(Literals);
-        this.MixedleWord = Literals;
-        this.Control = RandomWord;
+//       set6.start();
+//       set7.start();
+//       set8.start();
+//       set9.start();
+//       set10.start();
     }
 
     public void SetTextOnButtons(){
@@ -269,11 +300,11 @@ public class Dropwords extends AppCompatActivity {
         pr4.setEnabled(true);
         pr5.setEnabled(true);
         pr5.setEnabled(true);
-        pr6.setEnabled(true);
-        pr7.setEnabled(true);
-        pr8.setEnabled(true);
-        pr91.setEnabled(true);
-        pr10.setEnabled(true);
+//        pr6.setEnabled(true);
+//        pr7.setEnabled(true);
+//        pr8.setEnabled(true);
+//        pr91.setEnabled(true);
+//        pr10.setEnabled(true);
 
         pr1.setVisibility(View.VISIBLE);
         pr2.setVisibility(View.VISIBLE);
@@ -281,11 +312,11 @@ public class Dropwords extends AppCompatActivity {
         pr4.setVisibility(View.VISIBLE);
         pr5.setVisibility(View.VISIBLE);
         pr5.setVisibility(View.VISIBLE);
-        pr6.setVisibility(View.VISIBLE);
-        pr7.setVisibility(View.VISIBLE);
-        pr8.setVisibility(View.VISIBLE);
-        pr91.setVisibility(View.VISIBLE);
-        pr10.setVisibility(View.VISIBLE);
+//        pr6.setVisibility(View.VISIBLE);
+//        pr7.setVisibility(View.VISIBLE);
+//        pr8.setVisibility(View.VISIBLE);
+//        pr91.setVisibility(View.VISIBLE);
+//        pr10.setVisibility(View.VISIBLE);
 
         RandomGen();
         pr1.setText(String.valueOf(MixedleWord[0]));
@@ -293,11 +324,11 @@ public class Dropwords extends AppCompatActivity {
         pr3.setText(String.valueOf(MixedleWord[2]));
         pr4.setText(String.valueOf(MixedleWord[3]));
         pr5.setText(String.valueOf(MixedleWord[4]));
-        pr6.setText(String.valueOf(MixedleWord[0]));
-        pr7.setText(String.valueOf(MixedleWord[1]));
-        pr8.setText(String.valueOf(MixedleWord[2]));
-        pr91.setText(String.valueOf(MixedleWord[3]));
-        pr10.setText(String.valueOf(MixedleWord[4]));
+//        pr6.setText(String.valueOf(MixedleWord[0]));
+//        pr7.setText(String.valueOf(MixedleWord[1]));
+//        pr8.setText(String.valueOf(MixedleWord[2]));
+//        pr91.setText(String.valueOf(MixedleWord[3]));
+//        pr10.setText(String.valueOf(MixedleWord[4]));
 
 
     }
@@ -309,35 +340,35 @@ public class Dropwords extends AppCompatActivity {
         set3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
         set4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ   Х 350      с 1
         set5 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper5); // право  У 150     с 2
-        set6 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper6); // диавгональ, с 2
-        set7 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper7); // лево У 300,  с3
-        set8 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper8); //верх  Х 225        с3
-        set9 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper9); // низ  Х 130     с4
-        set10 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper10); // право У 400     с 4
-
-        set9.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {}
-            @Override
-            public void onAnimationEnd(Animator animation) {
-              //  ButtonsGome();
-            } // окончсание и пропадание кнопок
-            @Override
-            public void onAnimationCancel(Animator animation) {}
-            @Override
-            public void onAnimationRepeat(Animator animation) {}
-        });
+//        set6 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper6); // диавгональ, с 2
+//        set7 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper7); // лево У 300,  с3
+//        set8 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper8); //верх  Х 225        с3
+//        set9 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper9); // низ  Х 130     с4
+//        set10 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper10); // право У 400     с 4
+//
+//        set9.addListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {}
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//              //  ButtonsGome();
+//            } // окончсание и пропадание кнопок
+//            @Override
+//            public void onAnimationCancel(Animator animation) {}
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {}
+//        });
 
         set1.setTarget(pr1);
         set2.setTarget(pr2);
         set3.setTarget(pr3);
         set4.setTarget(pr4);
         set5.setTarget(pr5);
-        set6.setTarget(pr6);
-        set7.setTarget(pr7);
-        set8.setTarget(pr8);
-        set9.setTarget(pr91);
-        set10.setTarget(pr10);
+//        set6.setTarget(pr6);
+//        set7.setTarget(pr7);
+//        set8.setTarget(pr8);
+//        set9.setTarget(pr91);
+//        set10.setTarget(pr10);
         SetStart();
 
     }

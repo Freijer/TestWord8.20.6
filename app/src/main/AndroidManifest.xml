@@ -9,14 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Wordscollect"
+        <activity android:name=".SewralWords">
+            <intent-filter>
+                <action android:name=".SewralWords" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Wordscollect"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name=".Wordscollect" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Dropwords">
             <intent-filter>

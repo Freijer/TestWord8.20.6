@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void For(View v) {
-        Intent intent = new Intent(".Dropwords");
+        Intent intent = new Intent(".SewralWords");
         startActivity(intent);
     }
 

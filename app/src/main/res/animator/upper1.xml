@@ -18,8 +18,4 @@
             android:repeatCount="4"
             android:repeatMode="reverse"/>
     </set>
-    <objectAnimator
-        android:propertyName="alpha"
-        android:duration="500"
-        android:valueTo="1f"/>
 </set>
