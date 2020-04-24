@@ -7,7 +7,7 @@
             android:valueTo="700"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="4"
+            android:repeatCount="infinite"
             android:repeatMode="reverse"/>
         <objectAnimator
             android:duration="4300"
@@ -15,7 +15,7 @@
             android:valueTo="910"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="4"
+            android:repeatCount="infinite"
             android:repeatMode="reverse"/>
     </set>
 </set>

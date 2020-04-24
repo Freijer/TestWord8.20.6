@@ -2,20 +2,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <set>
         <objectAnimator
-            android:duration="5000"
+            android:duration="4500"
             android:valueFrom="0"
-            android:valueTo="1820"
+            android:valueTo="1100"
             android:valueType="floatType"
             android:propertyName="y"
-            android:repeatCount="4"
+            android:repeatCount="infinite"
             android:repeatMode="reverse"/>
         <objectAnimator
-            android:duration="5000"
+            android:duration="4500"
             android:valueFrom="0"
-            android:valueTo="910"
+            android:valueTo="850"
             android:valueType="floatType"
             android:propertyName="X"
-            android:repeatCount="4"
+            android:repeatCount="infinite"
             android:repeatMode="reverse"/>
     </set>
 </set>

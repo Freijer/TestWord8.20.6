@@ -1,8 +1,15 @@
 package freijer.app.testword;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +58,23 @@ public class SewralWords extends AppCompatActivity {
     protected String Control;
     protected int numsofliteralsinword;
 
+    protected AnimatorSet set1;
+    protected AnimatorSet set2;
+    protected AnimatorSet set3;
+    protected AnimatorSet set4;
+    protected AnimatorSet set5;
+    protected AnimatorSet set6;
+    protected AnimatorSet set7;
+    protected AnimatorSet set8;
+    protected AnimatorSet set9;
+    protected AnimatorSet set10;
+    protected AnimatorSet set11;
+    protected AnimatorSet set12;
+    protected AnimatorSet set13;
+    protected AnimatorSet set14;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +94,7 @@ public class SewralWords extends AppCompatActivity {
         pr12 = findViewById(R.id.pr12);
         pr13 = findViewById(R.id.pr13);
         pr14 = findViewById(R.id.pr14);
+        start = findViewById(R.id.start);
         textSee = findViewById(R.id.textSee);
 
         ControlWordsfinFail();
@@ -78,10 +102,9 @@ public class SewralWords extends AppCompatActivity {
         Randomizator();
         GoneButnnons();
         ShowButtons();
-
         String gg = Integer.toString(numsofliteralsinword);
         textSee.setText(gg + word);
-
+        Creates();
 
     }
 
@@ -195,5 +218,105 @@ public class SewralWords extends AppCompatActivity {
     } //  Разбиваем слово на буквы
 
 
+
+
+    ObjectAnimator  button1;
+    ObjectAnimator  button2;
+    ObjectAnimator  button3;
+    ObjectAnimator  button4;
+    ObjectAnimator  button5;
+    ObjectAnimator  button6;
+    ObjectAnimator  button7;
+    ObjectAnimator  button8;
+    ObjectAnimator  button9;
+    ObjectAnimator  button10;
+    ObjectAnimator  button11;
+    ObjectAnimator  button12;
+    ObjectAnimator  button13;
+    ObjectAnimator  button14;
+    //а таким образом можно давать рандомные коордлинаты что бы всегда с разных точек начиналось старт кнгопок движение
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void Creates(){
+        button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
+                PropertyValuesHolder.ofFloat("x", 0, 850),
+                PropertyValuesHolder.ofFloat("y", 0, 1100));
+        button1.setDuration(5100);
+        button1.setRepeatCount(ObjectAnimator.INFINITE);
+        button1.setRepeatMode(ObjectAnimator.REVERSE);
+        button1.start();
+
+        button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
+                PropertyValuesHolder.ofFloat("x", 200, 400),
+                PropertyValuesHolder.ofFloat("y", 0, 1100));
+        button2.setDuration(4400);
+        button2.setRepeatCount(ObjectAnimator.INFINITE);
+        button2.setRepeatMode(ObjectAnimator.REVERSE);
+        button2.start();
+
+        button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
+                PropertyValuesHolder.ofFloat("x", 0, 910),
+                PropertyValuesHolder.ofFloat("y", 700, 700));
+        button3.setDuration(5000);
+        button3.setRepeatCount(ObjectAnimator.INFINITE);
+        button3.setRepeatMode(ObjectAnimator.REVERSE);
+        button3.start();
+
+        button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
+                PropertyValuesHolder.ofFloat("x", 0, 910),
+                PropertyValuesHolder.ofFloat("y", 900, 900));
+        button4.setDuration(4600);
+        button4.setRepeatCount(ObjectAnimator.INFINITE);
+        button4.setRepeatMode(ObjectAnimator.REVERSE);
+        button4.start();
+
+
+//рерзевное создание через XML
+//        set1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
+//        set2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper2); // лево У 100, с0
+//        set3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
+//        set4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ   Х 350      с 1
+//        set5 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper5); // прав
+//        set6 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
+//        set7 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper2); // лево У 100, с0
+//        set8 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
+//        set9 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ   Х 350      с 1
+//        set10 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper5); // прав
+//        set11 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper11); // диагональ, с 0
+//        set12 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper2); // лево У 100, с0
+//        set13 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper3); // верх, Х 30    с 1
+//        set14 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper4); // низ   Х 350      с 1
+//        //set1.setTarget(pr1);
+//        set2.setTarget(pr2);
+//        set3.setTarget(pr3);
+//        set4.setTarget(pr4);
+//        set5.setTarget(pr5);
+//        set6.setTarget(pr6);
+//        set7.setTarget(pr7);
+//        set8.setTarget(pr8);
+//        set9.setTarget(pr9);
+//        set10.setTarget(pr10);
+//        set11.setTarget(pr11);
+//        set12.setTarget(pr12);
+//        set13.setTarget(pr13);
+//        set14.setTarget(pr14);
+//        //set1.start();
+//        set2.start();
+//        set3.start();
+////        set4.start();
+////        set5.start();
+////       set6.start();
+////       set7.start();
+////       set8.start();
+////       set9.start();
+////       set10.start();
+//        set11.start();
+////        set12.start();
+////        set13.start();
+////        set14.start();   ht
+
+
+
+
+    }
 
 }
