@@ -32,13 +32,42 @@ public class SewralWords extends AppCompatActivity {
     //у каждого слова свой ряд
     // из них надо собрать чем больше слов тем лучше
     // каждое слово +1 очко.
-    // слова до 3 букв: -1 оск
+    // слова из 2 букв: -1 очко
     // от 3 до 4 букв +1 очко
     // от 4 бкв +2 очка
 
     // точно такую же, но буквы можно использовать множество раз
 
     // при нажатии копия кнопки с буквой уходит на новое место - каждое слово, новая строка
+//    protected AnimatorSet set1;
+//    protected AnimatorSet set2;
+//    protected AnimatorSet set3;
+//    protected AnimatorSet set4;
+//    protected AnimatorSet set5;
+//    protected AnimatorSet set6;
+//    protected AnimatorSet set7;
+//    protected AnimatorSet set8;
+//    protected AnimatorSet set9;
+//    protected AnimatorSet set10;
+//    protected AnimatorSet set11;
+//    protected AnimatorSet set12;
+//    protected AnimatorSet set13;
+//    protected AnimatorSet set14;
+
+    ObjectAnimator  button1;
+    ObjectAnimator  button2;
+    ObjectAnimator  button3;
+    ObjectAnimator  button4;
+    ObjectAnimator  button5;
+    ObjectAnimator  button6;
+    ObjectAnimator  button7;
+    ObjectAnimator  button8;
+    ObjectAnimator  button9;
+    ObjectAnimator  button10;
+    ObjectAnimator  button11;
+    ObjectAnimator  button12;
+    ObjectAnimator  button13;
+    ObjectAnimator  button14;
 
     protected TextView textSee;
     protected Button start, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
@@ -58,20 +87,7 @@ public class SewralWords extends AppCompatActivity {
     protected String Control;
     protected int numsofliteralsinword;
 
-    protected AnimatorSet set1;
-    protected AnimatorSet set2;
-    protected AnimatorSet set3;
-    protected AnimatorSet set4;
-    protected AnimatorSet set5;
-    protected AnimatorSet set6;
-    protected AnimatorSet set7;
-    protected AnimatorSet set8;
-    protected AnimatorSet set9;
-    protected AnimatorSet set10;
-    protected AnimatorSet set11;
-    protected AnimatorSet set12;
-    protected AnimatorSet set13;
-    protected AnimatorSet set14;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -218,22 +234,6 @@ public class SewralWords extends AppCompatActivity {
     } //  Разбиваем слово на буквы
 
 
-
-
-    ObjectAnimator  button1;
-    ObjectAnimator  button2;
-    ObjectAnimator  button3;
-    ObjectAnimator  button4;
-    ObjectAnimator  button5;
-    ObjectAnimator  button6;
-    ObjectAnimator  button7;
-    ObjectAnimator  button8;
-    ObjectAnimator  button9;
-    ObjectAnimator  button10;
-    ObjectAnimator  button11;
-    ObjectAnimator  button12;
-    ObjectAnimator  button13;
-    ObjectAnimator  button14;
     //а таким образом можно давать рандомные коордлинаты что бы всегда с разных точек начиналось старт кнгопок движение
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Creates(){
@@ -255,7 +255,7 @@ public class SewralWords extends AppCompatActivity {
 
         button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
-                PropertyValuesHolder.ofFloat("y", 700, 700));
+                PropertyValuesHolder.ofFloat("y", 100, 100));
         button3.setDuration(5000);
         button3.setRepeatCount(ObjectAnimator.INFINITE);
         button3.setRepeatMode(ObjectAnimator.REVERSE);
@@ -263,11 +263,43 @@ public class SewralWords extends AppCompatActivity {
 
         button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
-                PropertyValuesHolder.ofFloat("y", 900, 900));
+                PropertyValuesHolder.ofFloat("y", 500, 500));
         button4.setDuration(4600);
         button4.setRepeatCount(ObjectAnimator.INFINITE);
         button4.setRepeatMode(ObjectAnimator.REVERSE);
         button4.start();
+
+        button5 = ObjectAnimator.ofPropertyValuesHolder(pr5,
+                PropertyValuesHolder.ofFloat("x", 0, 910),
+                PropertyValuesHolder.ofFloat("y", 900, 900));
+        button5.setDuration(5300);
+        button5.setRepeatCount(ObjectAnimator.INFINITE);
+        button5.setRepeatMode(ObjectAnimator.REVERSE);
+        button5.start();
+
+        button6 = ObjectAnimator.ofPropertyValuesHolder(pr6,
+                PropertyValuesHolder.ofFloat("x", 910, 0),
+                PropertyValuesHolder.ofFloat("y", 300, 300));
+        button6.setDuration(5600);
+        button6.setRepeatCount(ObjectAnimator.INFINITE);
+        button6.setRepeatMode(ObjectAnimator.REVERSE);
+        button6.start();
+
+        button7 = ObjectAnimator.ofPropertyValuesHolder(pr7,
+                PropertyValuesHolder.ofFloat("x", 910, 0),
+                PropertyValuesHolder.ofFloat("y", 700, 700));
+        button7.setDuration(4400);
+        button7.setRepeatCount(ObjectAnimator.INFINITE);
+        button7.setRepeatMode(ObjectAnimator.REVERSE);
+        button7.start();
+
+        button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
+                PropertyValuesHolder.ofFloat("x", 910, 0),
+                PropertyValuesHolder.ofFloat("y", 1100, 1100));
+        button8.setDuration(5500);
+        button8.setRepeatCount(ObjectAnimator.INFINITE);
+        button8.setRepeatMode(ObjectAnimator.REVERSE);
+        button8.start();
 
 
 //рерзевное создание через XML
