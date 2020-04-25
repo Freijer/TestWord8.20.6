@@ -2,6 +2,7 @@ package freijer.app.testword;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 
 
 import android.animation.Animator;
@@ -11,7 +12,11 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -38,7 +43,7 @@ public class SewralWords extends AppCompatActivity {
 
     // точно такую же, но буквы можно использовать множество раз
 
-    // при нажатии копия кнопки с буквой уходит на новое место - каждое слово, новая строка
+// при нажатии копия кнопки с буквой уходит на новое место - каждое слово, новая строка
 //    protected AnimatorSet set1;
 //    protected AnimatorSet set2;
 //    protected AnimatorSet set3;
@@ -86,15 +91,23 @@ public class SewralWords extends AppCompatActivity {
     protected String[] MixedleWord; //смешение
     protected String Control;
     protected int numsofliteralsinword;
+    protected int speed;
 
+    public int getSpeed() {
+        return speed;
+    }
 
-
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sewral_words);
+
+
 
         pr1 = findViewById(R.id.pr1);
         pr2 = findViewById(R.id.pr2);
@@ -113,14 +126,17 @@ public class SewralWords extends AppCompatActivity {
         start = findViewById(R.id.start);
         textSee = findViewById(R.id.textSee);
 
-        ControlWordsfinFail();
-        ReadWords();
-        Randomizator();
-        GoneButnnons();
-        ShowButtons();
+        ControlWordsfinFail(); // читаем проверочные слова
+        ReadWords(); // читаем ключевык
+        Randomizator(); // разиваем на буквы
+        GoneButnnons(); //все кнопки изначально не видимы
+        ShowButtons(); // услвие появление кнопок зависитот кол-ва букв в слове
+        SetLiteralsonButtons(); //установка букв на слова
+        Creates(); //активация и движеение кнопок
+
         String gg = Integer.toString(numsofliteralsinword);
         textSee.setText(gg + word);
-        Creates();
+
 
     }
 
@@ -139,9 +155,7 @@ public class SewralWords extends AppCompatActivity {
         pr12.setVisibility(View.GONE);
         pr13.setVisibility(View.GONE);
         pr14.setVisibility(View.GONE);
-
     }
-
     public void ShowButtons(){
         switch (numsofliteralsinword){
             case 11:
@@ -149,34 +163,33 @@ public class SewralWords extends AppCompatActivity {
                 pr2.setVisibility(View.VISIBLE);
                 pr3.setVisibility(View.VISIBLE);
                 pr4.setVisibility(View.VISIBLE);
-                pr5.setVisibility(View.VISIBLE);
-                pr6.setVisibility(View.VISIBLE);
-                pr7.setVisibility(View.VISIBLE);
-                pr8.setVisibility(View.VISIBLE);
-                pr9.setVisibility(View.VISIBLE);
-                pr10.setVisibility(View.VISIBLE);
-                pr11.setVisibility(View.VISIBLE);
+//                pr5.setVisibility(View.VISIBLE);
+//                pr6.setVisibility(View.VISIBLE);
+//                pr7.setVisibility(View.VISIBLE);
+//                pr8.setVisibility(View.VISIBLE);
+//                pr9.setVisibility(View.VISIBLE);
+//                pr10.setVisibility(View.VISIBLE);
+//                pr11.setVisibility(View.VISIBLE);
                 break;
             case 14:
                 pr1.setVisibility(View.VISIBLE);
                 pr2.setVisibility(View.VISIBLE);
                 pr3.setVisibility(View.VISIBLE);
                 pr4.setVisibility(View.VISIBLE);
-                pr5.setVisibility(View.VISIBLE);
-                pr6.setVisibility(View.VISIBLE);
-                pr7.setVisibility(View.VISIBLE);
-                pr8.setVisibility(View.VISIBLE);
-                pr9.setVisibility(View.VISIBLE);
-                pr10.setVisibility(View.VISIBLE);
-                pr11.setVisibility(View.VISIBLE);
-                pr12.setVisibility(View.VISIBLE);
-                pr13.setVisibility(View.VISIBLE);
-                pr14.setVisibility(View.VISIBLE);
+//                pr5.setVisibility(View.VISIBLE);
+//                pr6.setVisibility(View.VISIBLE);
+//                pr7.setVisibility(View.VISIBLE);
+//                pr8.setVisibility(View.VISIBLE);
+//                pr9.setVisibility(View.VISIBLE);
+//                pr10.setVisibility(View.VISIBLE);
+//                pr11.setVisibility(View.VISIBLE);
+//                pr12.setVisibility(View.VISIBLE);
+//                pr13.setVisibility(View.VISIBLE);
+//                pr14.setVisibility(View.VISIBLE);
                 break;
         }
 
     }
-
     public void ReadWords(){
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("sevrallwords.txt")));
@@ -208,9 +221,7 @@ public class SewralWords extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }// Читаем ключевые слова из файлика
-
-
+    }// Читаем проверочные слова из файлика
     public void Randomizator(){
         if (!list.isEmpty()) {
             this.indexWord = r.nextInt(list.size());
@@ -233,6 +244,40 @@ public class SewralWords extends AppCompatActivity {
         this.numsofliteralsinword = MixedleWord.length;
     } //  Разбиваем слово на буквы
 
+    protected void SetLiteralsonButtons(){
+        switch (numsofliteralsinword) {
+            case 11:
+            pr1.setText(String.valueOf(MixedleWord[0]));
+            pr2.setText(String.valueOf(MixedleWord[1]));
+            pr3.setText(String.valueOf(MixedleWord[2]));
+            pr4.setText(String.valueOf(MixedleWord[3]));
+            pr5.setText(String.valueOf(MixedleWord[4]));
+            pr6.setText(String.valueOf(MixedleWord[5]));
+            pr7.setText(String.valueOf(MixedleWord[6]));
+            pr8.setText(String.valueOf(MixedleWord[7]));
+            pr9.setText(String.valueOf(MixedleWord[8]));
+            pr10.setText(String.valueOf(MixedleWord[9]));
+            pr11.setText(String.valueOf(MixedleWord[10]));
+         break;
+            case 14:
+                pr1.setText(String.valueOf(MixedleWord[0]));
+                pr2.setText(String.valueOf(MixedleWord[1]));
+                pr3.setText(String.valueOf(MixedleWord[2]));
+                pr4.setText(String.valueOf(MixedleWord[3]));
+                pr5.setText(String.valueOf(MixedleWord[4]));
+                pr6.setText(String.valueOf(MixedleWord[5]));
+                pr7.setText(String.valueOf(MixedleWord[6]));
+                pr8.setText(String.valueOf(MixedleWord[7]));
+                pr9.setText(String.valueOf(MixedleWord[8]));
+                pr10.setText(String.valueOf(MixedleWord[9]));
+                pr11.setText(String.valueOf(MixedleWord[10]));
+                pr12.setText(String.valueOf(MixedleWord[11]));
+                pr13.setText(String.valueOf(MixedleWord[12]));
+                pr14.setText(String.valueOf(MixedleWord[13]));
+                break;
+        }
+
+    }
 
     //а таким образом можно давать рандомные коордлинаты что бы всегда с разных точек начиналось старт кнгопок движение
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -240,67 +285,116 @@ public class SewralWords extends AppCompatActivity {
         button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
                 PropertyValuesHolder.ofFloat("x", 0, 850),
                 PropertyValuesHolder.ofFloat("y", 0, 1100));
-        button1.setDuration(5100);
+        button1.setDuration(9000);
         button1.setRepeatCount(ObjectAnimator.INFINITE);
         button1.setRepeatMode(ObjectAnimator.REVERSE);
         button1.start();
 
+//2 кнопка
         button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
                 PropertyValuesHolder.ofFloat("x", 200, 400),
                 PropertyValuesHolder.ofFloat("y", 0, 1100));
-        button2.setDuration(4400);
+        button2.setDuration(4400 +  getSpeed());
         button2.setRepeatCount(ObjectAnimator.INFINITE);
         button2.setRepeatMode(ObjectAnimator.REVERSE);
         button2.start();
-
+//3 кнопка
         button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
                 PropertyValuesHolder.ofFloat("y", 100, 100));
-        button3.setDuration(5000);
+        button3.setDuration(5000 +  getSpeed());
         button3.setRepeatCount(ObjectAnimator.INFINITE);
         button3.setRepeatMode(ObjectAnimator.REVERSE);
         button3.start();
-
+//4 кнопка
         button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
                 PropertyValuesHolder.ofFloat("y", 500, 500));
-        button4.setDuration(4600);
+        button4.setDuration(4600 +  getSpeed());
         button4.setRepeatCount(ObjectAnimator.INFINITE);
         button4.setRepeatMode(ObjectAnimator.REVERSE);
         button4.start();
-
+//5 кнопка
         button5 = ObjectAnimator.ofPropertyValuesHolder(pr5,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
                 PropertyValuesHolder.ofFloat("y", 900, 900));
-        button5.setDuration(5300);
+        button5.setDuration(5300 +  getSpeed());
         button5.setRepeatCount(ObjectAnimator.INFINITE);
         button5.setRepeatMode(ObjectAnimator.REVERSE);
         button5.start();
-
+//6 кнопка
         button6 = ObjectAnimator.ofPropertyValuesHolder(pr6,
                 PropertyValuesHolder.ofFloat("x", 910, 0),
                 PropertyValuesHolder.ofFloat("y", 300, 300));
-        button6.setDuration(5600);
+        button6.setDuration(5600 +  getSpeed());
         button6.setRepeatCount(ObjectAnimator.INFINITE);
         button6.setRepeatMode(ObjectAnimator.REVERSE);
         button6.start();
-
+//7 кнопка
         button7 = ObjectAnimator.ofPropertyValuesHolder(pr7,
                 PropertyValuesHolder.ofFloat("x", 910, 0),
                 PropertyValuesHolder.ofFloat("y", 700, 700));
-        button7.setDuration(4400);
+        button7.setDuration(4400 +  getSpeed());
         button7.setRepeatCount(ObjectAnimator.INFINITE);
         button7.setRepeatMode(ObjectAnimator.REVERSE);
         button7.start();
-
+//8 кнопка
         button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
-                PropertyValuesHolder.ofFloat("x", 910, 0),
-                PropertyValuesHolder.ofFloat("y", 1100, 1100));
-        button8.setDuration(5500);
+                PropertyValuesHolder.ofFloat("x", 200, 650),
+                PropertyValuesHolder.ofFloat("y", 1100, 100));
+        button8.setDuration(3900 +  getSpeed());
         button8.setRepeatCount(ObjectAnimator.INFINITE);
         button8.setRepeatMode(ObjectAnimator.REVERSE);
         button8.start();
+//9 кнопка не настроил
+        button9 = ObjectAnimator.ofPropertyValuesHolder(pr9,
+                PropertyValuesHolder.ofFloat("x", 800, 800),
+                PropertyValuesHolder.ofFloat("y", 1100, 0));
+        button9.setDuration(4100 +  getSpeed());
+        button9.setRepeatCount(ObjectAnimator.INFINITE);
+        button9.setRepeatMode(ObjectAnimator.REVERSE);
+        button9.start();
+//10 кнопка
+        button10 = ObjectAnimator.ofPropertyValuesHolder(pr10,
+                PropertyValuesHolder.ofFloat("x", 0, 250),
+                PropertyValuesHolder.ofFloat("y", 1100, 0));
+        button10.setDuration(4500 +  getSpeed());
+        button10.setRepeatCount(ObjectAnimator.INFINITE);
+        button10.setRepeatMode(ObjectAnimator.REVERSE);
+        button10.start();
+//11 кнопка
+        button11 = ObjectAnimator.ofPropertyValuesHolder(pr11,
+                PropertyValuesHolder.ofFloat("x", 910, 100),
+                PropertyValuesHolder.ofFloat("y", 100, 950));
+        button11.setDuration(5700 +  getSpeed());
+        button11.setRepeatCount(ObjectAnimator.INFINITE);
+        button11.setRepeatMode(ObjectAnimator.REVERSE);
+        button11.start();
+//12 кнопка
+        button12 = ObjectAnimator.ofPropertyValuesHolder(pr12,
+                PropertyValuesHolder.ofFloat("x", 700, 400),
+                PropertyValuesHolder.ofFloat("y", 0, 1100));
+        button12.setDuration(3600 +  getSpeed());
+        button12.setRepeatCount(ObjectAnimator.INFINITE);
+        button12.setRepeatMode(ObjectAnimator.REVERSE);
+        button12.start();
 
+//13 кнопка
+        button13 = ObjectAnimator.ofPropertyValuesHolder(pr13,
+                PropertyValuesHolder.ofFloat("x", 910, 0),
+                PropertyValuesHolder.ofFloat("y", 1100, 1100));
+        button13.setDuration(5100 +  getSpeed());
+        button13.setRepeatCount(ObjectAnimator.INFINITE);
+        button13.setRepeatMode(ObjectAnimator.REVERSE);
+        button13.start();
+//14 кнопка
+        button14 = ObjectAnimator.ofPropertyValuesHolder(pr14,
+                PropertyValuesHolder.ofFloat("x", 500, 500),
+                PropertyValuesHolder.ofFloat("y", 0, 1100));
+        button14.setDuration(4800 +  getSpeed());
+        button14.setRepeatCount(ObjectAnimator.INFINITE);
+        button14.setRepeatMode(ObjectAnimator.REVERSE);
+        button14.start();
 
 //рерзевное создание через XML
 //        set1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
@@ -349,6 +443,49 @@ public class SewralWords extends AppCompatActivity {
 
 
 
+    } //движение кнопок
+
+    public void ClickButton1(View v){
+        button1.end();
+        // какже ты меня задрал FastOutLinearInInterpolator
+        button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
+                PropertyValuesHolder.ofFloat("x", 20),
+                PropertyValuesHolder.ofFloat("y", 1400));
+        button1.setDuration(3000);
+
+
+
+
+        button1.start();
+
     }
+
+    public void ClickButton2(View v){
+                 button2.end();
+                 button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
+                PropertyValuesHolder.ofFloat("x", 200),
+                PropertyValuesHolder.ofFloat("y", 1400));
+        button2.setDuration(3000);
+        button2.start();
+    }
+
+    public void ClickButton3(View v){
+        button3.end();
+        button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
+                PropertyValuesHolder.ofFloat("x", 380),
+                PropertyValuesHolder.ofFloat("y", 1400));
+        button3.setDuration(3000);
+        button3.start();
+    }
+
+    public void ClickButton4(View v){
+        button4.end();
+        button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
+                PropertyValuesHolder.ofFloat("x", 560),
+                PropertyValuesHolder.ofFloat("y", 1400));
+        button4.setDuration(3000);
+        button4.start();
+    }
+
 
 }
