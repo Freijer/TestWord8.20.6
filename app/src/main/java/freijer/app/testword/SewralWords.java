@@ -20,6 +20,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -61,6 +62,10 @@ public class SewralWords extends AppCompatActivity {
 //    protected AnimatorSet set13;
 //    protected AnimatorSet set14;
 
+
+    // цветные поллоски поместить в Кард или ресайклВтю что ы можно было их прокручивать
+
+
     ObjectAnimator  button1;
     ObjectAnimator  button2;
     ObjectAnimator  button3;
@@ -79,6 +84,7 @@ public class SewralWords extends AppCompatActivity {
     protected TextView textSee;
     protected Button start, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
     private Button chek1, chek2, chek3;
+    private ImageView imv1, imv2, imv3, imv4;
     protected ArrayList<String> MainListWord = new ArrayList<String>();// при нажатии кнопки собисрется слово
     protected ArrayList<Integer> ListCoordinateX_1 = new ArrayList<Integer>();
     protected ArrayList<Integer> ListCoordinateX_2 = new ArrayList<Integer>();
@@ -105,7 +111,7 @@ public class SewralWords extends AppCompatActivity {
     protected String Control;
     protected int numsofliteralsinword;
     protected int speed;
-
+    protected int shiftLiterals =40;                 //миещние букв в лево
     public int getSpeed() {
         return speed;
     }
@@ -142,6 +148,12 @@ public class SewralWords extends AppCompatActivity {
         chek2 = findViewById(R.id.chek2);
         chek3 = findViewById(R.id.chek3);
 
+        imv1 = findViewById(R.id.imv1);
+        imv2 = findViewById(R.id.imv2);
+        imv3 = findViewById(R.id.imv3);
+        imv4 = findViewById(R.id.imv4);
+
+
         textSee = findViewById(R.id.textSee);
 
         ListXUpFull(); // заполняем листы координат
@@ -160,21 +172,21 @@ public class SewralWords extends AppCompatActivity {
     public void ListXUpFull(){
 // Первое словор по горзинотале
         ListCoordinateX_1.add(0);
-        ListCoordinateX_1.add(100-20);
-        ListCoordinateX_1.add(180-20);
-        ListCoordinateX_1.add(260-20);
-        ListCoordinateX_1.add(340-20);
-        ListCoordinateX_1.add(420-20);
-        ListCoordinateX_1.add(500-20);
-        ListCoordinateX_1.add(580-20);
-        ListCoordinateX_1.add(660-20);
-        ListCoordinateX_1.add(740-20);
-        ListCoordinateX_1.add(820-20);
-        ListCoordinateX_1.add(900-20);
-        ListCoordinateX_1.add(980-20);
-        ListCoordinateX_1.add(1060-20);
+        ListCoordinateX_1.add(100-shiftLiterals);
+        ListCoordinateX_1.add(180-shiftLiterals);
+        ListCoordinateX_1.add(260-shiftLiterals);
+        ListCoordinateX_1.add(340-shiftLiterals);
+        ListCoordinateX_1.add(420-shiftLiterals);
+        ListCoordinateX_1.add(500-shiftLiterals);
+        ListCoordinateX_1.add(580-shiftLiterals);
+        ListCoordinateX_1.add(660-shiftLiterals);
+        ListCoordinateX_1.add(740-shiftLiterals);
+        ListCoordinateX_1.add(820-shiftLiterals);
+        ListCoordinateX_1.add(900-shiftLiterals);
+        ListCoordinateX_1.add(980-shiftLiterals);
+        ListCoordinateX_1.add(1060-shiftLiterals);
 // первое слово по высоте
-        LineY_1.add(1400);
+        LineY_1.add(1250);
     } //координаты для первого слова
     public void ListXUpFull_2(){
 // Второе словор по горзинотале
@@ -259,8 +271,8 @@ public class SewralWords extends AppCompatActivity {
                 pr10.setVisibility(View.VISIBLE);
                 pr11.setVisibility(View.VISIBLE);
                 pr12.setVisibility(View.VISIBLE);
-                pr13.setVisibility(View.VISIBLE);
-                pr14.setVisibility(View.VISIBLE);
+//                pr13.setVisibility(View.VISIBLE);
+//                pr14.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -400,7 +412,7 @@ public class SewralWords extends AppCompatActivity {
 
         button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
                 PropertyValuesHolder.ofFloat("x", 0, 850),
-                PropertyValuesHolder.ofFloat("y", 0, 1100));
+                PropertyValuesHolder.ofFloat("y", 140, 1050));
         button1.setDuration(9000);
         button1.setRepeatCount(ObjectAnimator.INFINITE);
         button1.setRepeatMode(ObjectAnimator.REVERSE);
@@ -408,7 +420,7 @@ public class SewralWords extends AppCompatActivity {
 //2 кнопка
         button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
                 PropertyValuesHolder.ofFloat("x", 200, 400),
-                PropertyValuesHolder.ofFloat("y", 0, 1100));
+                PropertyValuesHolder.ofFloat("y", 140, 1050));
         button2.setDuration(4400 +  getSpeed());
         button2.setRepeatCount(ObjectAnimator.INFINITE);
         button2.setRepeatMode(ObjectAnimator.REVERSE);
@@ -416,7 +428,7 @@ public class SewralWords extends AppCompatActivity {
 //3 кнопка
         button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
-                PropertyValuesHolder.ofFloat("y", 100, 100));
+                PropertyValuesHolder.ofFloat("y", 140, 140));
         button3.setDuration(5000 +  getSpeed());
         button3.setRepeatCount(ObjectAnimator.INFINITE);
         button3.setRepeatMode(ObjectAnimator.REVERSE);
@@ -456,7 +468,7 @@ public class SewralWords extends AppCompatActivity {
 //8 кнопка
         button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
                 PropertyValuesHolder.ofFloat("x", 200, 650),
-                PropertyValuesHolder.ofFloat("y", 1100, 100));
+                PropertyValuesHolder.ofFloat("y", 1050, 140));
         button8.setDuration(3900 +  getSpeed());
         button8.setRepeatCount(ObjectAnimator.INFINITE);
         button8.setRepeatMode(ObjectAnimator.REVERSE);
@@ -464,7 +476,7 @@ public class SewralWords extends AppCompatActivity {
 //9 кнопка не настроил
         button9 = ObjectAnimator.ofPropertyValuesHolder(pr9,
                 PropertyValuesHolder.ofFloat("x", 800, 800),
-                PropertyValuesHolder.ofFloat("y", 1100, 0));
+                PropertyValuesHolder.ofFloat("y", 1050, 140));
         button9.setDuration(4100 +  getSpeed());
         button9.setRepeatCount(ObjectAnimator.INFINITE);
         button9.setRepeatMode(ObjectAnimator.REVERSE);
@@ -472,7 +484,7 @@ public class SewralWords extends AppCompatActivity {
 //10 кнопка
         button10 = ObjectAnimator.ofPropertyValuesHolder(pr10,
                 PropertyValuesHolder.ofFloat("x", 0, 250),
-                PropertyValuesHolder.ofFloat("y", 1100, 0));
+                PropertyValuesHolder.ofFloat("y", 1050, 140));
         button10.setDuration(4500 +  getSpeed());
         button10.setRepeatCount(ObjectAnimator.INFINITE);
         button10.setRepeatMode(ObjectAnimator.REVERSE);
@@ -480,7 +492,7 @@ public class SewralWords extends AppCompatActivity {
 //11 кнопка
         button11 = ObjectAnimator.ofPropertyValuesHolder(pr11,
                 PropertyValuesHolder.ofFloat("x", 910, 100),
-                PropertyValuesHolder.ofFloat("y", 100, 950));
+                PropertyValuesHolder.ofFloat("y", 140, 950));
         button11.setDuration(5700 +  getSpeed());
         button11.setRepeatCount(ObjectAnimator.INFINITE);
         button11.setRepeatMode(ObjectAnimator.REVERSE);
@@ -488,7 +500,7 @@ public class SewralWords extends AppCompatActivity {
 //12 кнопка
         button12 = ObjectAnimator.ofPropertyValuesHolder(pr12,
                 PropertyValuesHolder.ofFloat("x", 700, 400),
-                PropertyValuesHolder.ofFloat("y", 0, 1100));
+                PropertyValuesHolder.ofFloat("y", 140, 1050));
         button12.setDuration(3600 +  getSpeed());
         button12.setRepeatCount(ObjectAnimator.INFINITE);
         button12.setRepeatMode(ObjectAnimator.REVERSE);
@@ -497,7 +509,7 @@ public class SewralWords extends AppCompatActivity {
 //13 кнопка
         button13 = ObjectAnimator.ofPropertyValuesHolder(pr13,
                 PropertyValuesHolder.ofFloat("x", 910, 0),
-                PropertyValuesHolder.ofFloat("y", 1100, 1100));
+                PropertyValuesHolder.ofFloat("y", 1100, 1050));
         button13.setDuration(5100 +  getSpeed());
         button13.setRepeatCount(ObjectAnimator.INFINITE);
         button13.setRepeatMode(ObjectAnimator.REVERSE);
@@ -505,7 +517,7 @@ public class SewralWords extends AppCompatActivity {
 //14 кнопка
         button14 = ObjectAnimator.ofPropertyValuesHolder(pr14,
                 PropertyValuesHolder.ofFloat("x", 500, 500),
-                PropertyValuesHolder.ofFloat("y", 0, 1100));
+                PropertyValuesHolder.ofFloat("y", 140, 1050));
         button14.setDuration(4800 +  getSpeed());
         button14.setRepeatCount(ObjectAnimator.INFINITE);
         button14.setRepeatMode(ObjectAnimator.REVERSE);
