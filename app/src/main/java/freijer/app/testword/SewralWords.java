@@ -401,7 +401,7 @@ public class SewralWords extends AppCompatActivity {
 
 
     public void Chek_1(View v){
-        chek1.setBackgroundResource(R.drawable.yes);
+        chek1.setBackgroundResource(R.drawable.thrue);
     }
 
 

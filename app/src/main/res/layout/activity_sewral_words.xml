@@ -286,12 +286,12 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.736" />
+            app:layout_constraintVertical_bias="0.758" />
 
         <Button
             android:id="@+id/chek1"
-            android:layout_width="39dp"
-            android:layout_height="31dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_x="50dp"
             android:layout_y="361dp"
             android:background="@android:drawable/checkbox_on_background"
@@ -302,7 +302,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.81" />
+            app:layout_constraintVertical_bias="0.667" />
 
         <Button
             android:id="@+id/chek2"
