@@ -1,5 +1,6 @@
 package freijer.app.testword;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
@@ -10,6 +11,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -76,8 +78,19 @@ public class SewralWords extends AppCompatActivity {
 
     protected TextView textSee;
     protected Button start, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
-    protected ArrayList<String> ListWords = new ArrayList<String>();
-    protected ArrayList<Integer> ListCoordinateX = new ArrayList<Integer>();
+    private Button chek1, chek2, chek3;
+    protected ArrayList<String> MainListWord = new ArrayList<String>();// при нажатии кнопки собисрется слово
+    protected ArrayList<Integer> ListCoordinateX_1 = new ArrayList<Integer>();
+    protected ArrayList<Integer> ListCoordinateX_2 = new ArrayList<Integer>();
+    protected ArrayList<Integer> ListCoordinateX_3 = new ArrayList<Integer>();
+    protected ArrayList<Integer> ListCoordinateX_4 = new ArrayList<Integer>();
+    protected ArrayList<Integer> ListCoordinateX_5 = new ArrayList<Integer>();
+
+
+    protected ArrayList<Integer> LineY_1 = new ArrayList<Integer>();
+    protected ArrayList<Integer> LineY_2 = new ArrayList<Integer>();
+    protected ArrayList<Integer> LineY_3 = new ArrayList<Integer>();
+    protected ArrayList<Integer> LineY_4 = new ArrayList<Integer>();
 
     private ArrayList<String> list;
     private ArrayList<String> listControl;
@@ -124,8 +137,14 @@ public class SewralWords extends AppCompatActivity {
         pr13 = findViewById(R.id.pr13);
         pr14 = findViewById(R.id.pr14);
         start = findViewById(R.id.start);
+
+        chek1 = findViewById(R.id.chek1);
+        chek2 = findViewById(R.id.chek2);
+        chek3 = findViewById(R.id.chek3);
+
         textSee = findViewById(R.id.textSee);
 
+        ListXUpFull(); // заполняем листы координат
         ControlWordsfinFail(); // читаем проверочные слова
         ReadWords(); // читаем ключевык
         Randomizator(); // разиваем на буквы
@@ -136,10 +155,65 @@ public class SewralWords extends AppCompatActivity {
 
         String gg = Integer.toString(numsofliteralsinword);
         textSee.setText(gg + word);
-
-
     }
 
+    public void ListXUpFull(){
+// Первое словор по горзинотале
+        ListCoordinateX_1.add(0);
+        ListCoordinateX_1.add(100-20);
+        ListCoordinateX_1.add(180-20);
+        ListCoordinateX_1.add(260-20);
+        ListCoordinateX_1.add(340-20);
+        ListCoordinateX_1.add(420-20);
+        ListCoordinateX_1.add(500-20);
+        ListCoordinateX_1.add(580-20);
+        ListCoordinateX_1.add(660-20);
+        ListCoordinateX_1.add(740-20);
+        ListCoordinateX_1.add(820-20);
+        ListCoordinateX_1.add(900-20);
+        ListCoordinateX_1.add(980-20);
+        ListCoordinateX_1.add(1060-20);
+// первое слово по высоте
+        LineY_1.add(1400);
+    } //координаты для первого слова
+    public void ListXUpFull_2(){
+// Второе словор по горзинотале
+        ListCoordinateX_1.add(0);
+        ListCoordinateX_1.add(100-20);
+        ListCoordinateX_1.add(180-20);
+        ListCoordinateX_1.add(260-20);
+        ListCoordinateX_1.add(340-20);
+        ListCoordinateX_1.add(420-20);
+        ListCoordinateX_1.add(500-20);
+        ListCoordinateX_1.add(580-20);
+        ListCoordinateX_1.add(660-20);
+        ListCoordinateX_1.add(740-20);
+        ListCoordinateX_1.add(820-20);
+        ListCoordinateX_1.add(900-20);
+        ListCoordinateX_1.add(980-20);
+        ListCoordinateX_1.add(1060-20);
+//второе слово по высоте
+        LineY_2.add(1550);
+    } //координаты второго слова
+    public void ListXUpFull_3(){
+// Третье словор по горзинотале
+        ListCoordinateX_1.add(0);
+        ListCoordinateX_1.add(100-20);
+        ListCoordinateX_1.add(180-20);
+        ListCoordinateX_1.add(260-20);
+        ListCoordinateX_1.add(340-20);
+        ListCoordinateX_1.add(420-20);
+        ListCoordinateX_1.add(500-20);
+        ListCoordinateX_1.add(580-20);
+        ListCoordinateX_1.add(660-20);
+        ListCoordinateX_1.add(740-20);
+        ListCoordinateX_1.add(820-20);
+        ListCoordinateX_1.add(900-20);
+        ListCoordinateX_1.add(980-20);
+        ListCoordinateX_1.add(1060-20);
+// третье слово по высоте
+        LineY_3.add(1700);
+    } // координаты третьего слова
     public void GoneButnnons(){
         pr1.setVisibility(View.GONE);
         pr2.setVisibility(View.GONE);
@@ -156,6 +230,7 @@ public class SewralWords extends AppCompatActivity {
         pr13.setVisibility(View.GONE);
         pr14.setVisibility(View.GONE);
     }
+
     public void ShowButtons(){
         switch (numsofliteralsinword){
             case 11:
@@ -163,29 +238,29 @@ public class SewralWords extends AppCompatActivity {
                 pr2.setVisibility(View.VISIBLE);
                 pr3.setVisibility(View.VISIBLE);
                 pr4.setVisibility(View.VISIBLE);
-//                pr5.setVisibility(View.VISIBLE);
-//                pr6.setVisibility(View.VISIBLE);
-//                pr7.setVisibility(View.VISIBLE);
-//                pr8.setVisibility(View.VISIBLE);
-//                pr9.setVisibility(View.VISIBLE);
-//                pr10.setVisibility(View.VISIBLE);
-//                pr11.setVisibility(View.VISIBLE);
+                pr5.setVisibility(View.VISIBLE);
+                pr6.setVisibility(View.VISIBLE);
+                pr7.setVisibility(View.VISIBLE);
+                pr8.setVisibility(View.VISIBLE);
+                pr9.setVisibility(View.VISIBLE);
+                pr10.setVisibility(View.VISIBLE);
+                pr11.setVisibility(View.VISIBLE);
                 break;
             case 14:
                 pr1.setVisibility(View.VISIBLE);
                 pr2.setVisibility(View.VISIBLE);
                 pr3.setVisibility(View.VISIBLE);
                 pr4.setVisibility(View.VISIBLE);
-//                pr5.setVisibility(View.VISIBLE);
-//                pr6.setVisibility(View.VISIBLE);
-//                pr7.setVisibility(View.VISIBLE);
-//                pr8.setVisibility(View.VISIBLE);
-//                pr9.setVisibility(View.VISIBLE);
-//                pr10.setVisibility(View.VISIBLE);
-//                pr11.setVisibility(View.VISIBLE);
-//                pr12.setVisibility(View.VISIBLE);
-//                pr13.setVisibility(View.VISIBLE);
-//                pr14.setVisibility(View.VISIBLE);
+                pr5.setVisibility(View.VISIBLE);
+                pr6.setVisibility(View.VISIBLE);
+                pr7.setVisibility(View.VISIBLE);
+                pr8.setVisibility(View.VISIBLE);
+                pr9.setVisibility(View.VISIBLE);
+                pr10.setVisibility(View.VISIBLE);
+                pr11.setVisibility(View.VISIBLE);
+                pr12.setVisibility(View.VISIBLE);
+                pr13.setVisibility(View.VISIBLE);
+                pr14.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -243,7 +318,6 @@ public class SewralWords extends AppCompatActivity {
         this.Control = this.word;
         this.numsofliteralsinword = MixedleWord.length;
     } //  Разбиваем слово на буквы
-
     protected void SetLiteralsonButtons(){
         switch (numsofliteralsinword) {
             case 11:
@@ -279,9 +353,51 @@ public class SewralWords extends AppCompatActivity {
 
     }
 
-    //а таким образом можно давать рандомные коордлинаты что бы всегда с разных точек начиналось старт кнгопок движение
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void Verify() {
+
+        String[] array = MainListWord.toArray(new String[0]);
+        String Key = (String.join("", array));
+        LineY_1.add(1400);
+        LineY_2.add(1550);
+        LineY_3.add(1700);
+/*
+        int scope = Integer.valueOf(MainListWord.size());
+        switch (scope){
+            case 1:
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+
+        }
+*/
+
+        if (Key.equals(Control)) {
+
+        }
+
+
+    }
+
+
+    public void Chek_1(View v){
+        chek1.setBackgroundResource(R.drawable.yes);
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Creates(){
+
+
+
         button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
                 PropertyValuesHolder.ofFloat("x", 0, 850),
                 PropertyValuesHolder.ofFloat("y", 0, 1100));
@@ -289,7 +405,6 @@ public class SewralWords extends AppCompatActivity {
         button1.setRepeatCount(ObjectAnimator.INFINITE);
         button1.setRepeatMode(ObjectAnimator.REVERSE);
         button1.start();
-
 //2 кнопка
         button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
                 PropertyValuesHolder.ofFloat("x", 200, 400),
@@ -444,48 +559,163 @@ public class SewralWords extends AppCompatActivity {
 
 
     } //движение кнопок
-
     public void ClickButton1(View v){
         button1.end();
         // какже ты меня задрал FastOutLinearInInterpolator
         button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
-                PropertyValuesHolder.ofFloat("x", 20),
-                PropertyValuesHolder.ofFloat("y", 1400));
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
         button1.setDuration(3000);
-
-
-
-
+        pr1.setBackgroundResource(R.drawable.newchangebutton);
         button1.start();
+        ListCoordinateX_1.remove(0);
+        pr1.setEnabled(false);
 
-    }
-
+    } //кнопка 1
     public void ClickButton2(View v){
                  button2.end();
                  button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
-                PropertyValuesHolder.ofFloat("x", 200),
-                PropertyValuesHolder.ofFloat("y", 1400));
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
         button2.setDuration(3000);
+        pr2.setBackgroundResource(R.drawable.newchangebutton);
         button2.start();
-    }
-
+        ListCoordinateX_1.remove(0);
+        pr2.setEnabled(false);
+    } //кнопка 2
     public void ClickButton3(View v){
         button3.end();
         button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
-                PropertyValuesHolder.ofFloat("x", 380),
-                PropertyValuesHolder.ofFloat("y", 1400));
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
         button3.setDuration(3000);
+        pr3.setBackgroundResource(R.drawable.newchangebutton);
         button3.start();
-    }
+        ListCoordinateX_1.remove(0);
+        pr3.setEnabled(false);
 
+    } //кнопка 3
     public void ClickButton4(View v){
         button4.end();
         button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
-                PropertyValuesHolder.ofFloat("x", 560),
-                PropertyValuesHolder.ofFloat("y", 1400));
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
         button4.setDuration(3000);
+        pr4.setBackgroundResource(R.drawable.newchangebutton);
         button4.start();
-    }
+        ListCoordinateX_1.remove(0);
+        pr4.setEnabled(false);
+    } //кнопка 4
+    public void ClickButton5(View v){
+        button5.end();
+        button5 = ObjectAnimator.ofPropertyValuesHolder(pr5,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button5.setDuration(3000);
+        pr5.setBackgroundResource(R.drawable.newchangebutton);
+        button5.start();
+        ListCoordinateX_1.remove(0);
+        pr5.setEnabled(false);
+    } //кнопка 5
+    public void ClickButton6(View v){
+        button6.end();
+        button6 = ObjectAnimator.ofPropertyValuesHolder(pr6,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button6.setDuration(3000);
+        pr6.setBackgroundResource(R.drawable.newchangebutton);
+        button6.start();
+        ListCoordinateX_1.remove(0);
+        pr6.setEnabled(false);
+    } //кнопка 6
+    public void ClickButton7(View v){
+        button7.end();
+        button7 = ObjectAnimator.ofPropertyValuesHolder(pr7,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button7.setDuration(3000);
+        pr7.setBackgroundResource(R.drawable.newchangebutton);
+        button7.start();
+        ListCoordinateX_1.remove(0);
+        pr7.setEnabled(false);
+    } //кнопка 7
+    public void ClickButton8(View v){
+        button8.end();
+        button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button8.setDuration(3000);
+        pr8.setBackgroundResource(R.drawable.newchangebutton);
+        button8.start();
+        ListCoordinateX_1.remove(0);
+        pr8.setEnabled(false);
+    } //кнопка 8
+    public void ClickButton9(View v){
+        button9.end();
+        button9 = ObjectAnimator.ofPropertyValuesHolder(pr9,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button9.setDuration(3000);
+        pr9.setBackgroundResource(R.drawable.newchangebutton);
+        button9.start();
+        ListCoordinateX_1.remove(0);
+        pr9.setEnabled(false);
+    } //кнопка 9
+    public void ClickButton10(View v){
+        button10.end();
+        button10 = ObjectAnimator.ofPropertyValuesHolder(pr10,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button10.setDuration(3000);
+        pr10.setBackgroundResource(R.drawable.newchangebutton);
+        button10.start();
+        ListCoordinateX_1.remove(0);
+        pr10.setEnabled(false);
+    } //кнопка 10
+    public void ClickButton11(View v){
+        button11.end();
+        button11 = ObjectAnimator.ofPropertyValuesHolder(pr11,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button11.setDuration(3000);
+        pr11.setBackgroundResource(R.drawable.newchangebutton);
+        button11.start();
+        ListCoordinateX_1.remove(0);
+        pr11.setEnabled(false);
+    } //кнопка 11
+    public void ClickButton12(View v){
+        button12.end();
+        button12 = ObjectAnimator.ofPropertyValuesHolder(pr12,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button12.setDuration(3000);
+        pr12.setBackgroundResource(R.drawable.newchangebutton);
+        button12.start();
+        ListCoordinateX_1.remove(0);
+        pr12.setEnabled(false);
+    } //кнопка 12
+    public void ClickButton13(View v){
+        button13.end();
+        button13 = ObjectAnimator.ofPropertyValuesHolder(pr13,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button13.setDuration(3000);
+        pr13.setBackgroundResource(R.drawable.newchangebutton);
+        button13.start();
+        ListCoordinateX_1.remove(0);
+        pr13.setEnabled(false);
+    } //кнопка 13
+    public void ClickButton14(View v){
+        button14.end();
+        button14 = ObjectAnimator.ofPropertyValuesHolder(pr14,
+                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+        button14.setDuration(3000);
+        pr14.setBackgroundResource(R.drawable.newchangebutton);
+        button14.start();
+        ListCoordinateX_1.remove(0);
+        pr14.setEnabled(false);
+    } //кнопка 14
 
 
 }

@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/pr1"
@@ -39,7 +39,6 @@
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
             android:onClick="ClickButton2"
-            android:text="2"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +53,6 @@
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
             android:onClick="ClickButton3"
-            android:text="3"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +67,6 @@
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
             android:onClick="ClickButton4"
-            android:text="4"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +80,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="5"
+            android:onClick="ClickButton5"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,21 +94,21 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="10"
+            android:onClick="ClickButton10"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.954"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.905" />
+            app:layout_constraintVertical_bias="0.816" />
 
         <Button
             android:id="@+id/pr6"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="6"
+            android:onClick="ClickButton6"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +122,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="7"
+            android:onClick="ClickButton7"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +136,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="8"
+            android:onClick="ClickButton8"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +150,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="9"
+            android:onClick="ClickButton9"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +164,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="14"
+            android:onClick="ClickButton14"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -181,54 +178,104 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="11"
+            android:onClick="ClickButton11"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.998" />
+            app:layout_constraintVertical_bias="0.816" />
 
         <Button
             android:id="@+id/pr12"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="12"
+            android:onClick="ClickButton12"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintHorizontal_bias="0.355"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.996" />
+            app:layout_constraintVertical_bias="0.811" />
 
         <Button
             android:id="@+id/pr13"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/forlessbutton"
-            android:text="13"
+            android:onClick="ClickButton13"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.905" />
+            app:layout_constraintVertical_bias="0.816" />
 
         <TextView
             android:id="@+id/textSee"
             android:layout_width="157dp"
             android:layout_height="42dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.884"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.069" />
+            app:layout_constraintVertical_bias="0.207" />
+
+        <Button
+            android:id="@+id/chek1"
+            android:layout_width="44dp"
+            android:layout_height="36dp"
+            android:layout_x="50dp"
+            android:layout_y="361dp"
+            android:background="@android:drawable/checkbox_on_background"
+            android:onClick="Chek_1"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.765" />
+
+        <Button
+            android:id="@+id/chek3"
+            android:layout_width="62dp"
+            android:layout_height="40dp"
+            android:background="@android:drawable/checkbox_on_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.967" />
+
+        <Button
+            android:id="@+id/chek2"
+            android:layout_width="62dp"
+            android:layout_height="40dp"
+            android:background="@android:drawable/checkbox_on_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.878" />
+
+        <Button
+            android:id="@+id/faq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/request"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.013"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.009" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
