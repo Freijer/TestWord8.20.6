@@ -339,10 +339,7 @@ public class SewralWords extends AppCompatActivity {
             ListXUpFull();
             chek1.setBackgroundResource(R.drawable.wrong);
         }
-        pr1.setEnabled(true);
-        pr1.setBackgroundResource(R.drawable.forlessbutton);
-        pr2.setEnabled(true);
-
+        EneblendButtonsAffterPress();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_2(View v){
@@ -354,18 +351,14 @@ public class SewralWords extends AppCompatActivity {
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.thrue);
-
-
-
-
         } else {
             this.LineY_1.remove(0);
             this.LineY_1.add(1620);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.wrong);
-
         }
+        EneblendButtonsAffterPress();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_3(View v){
@@ -383,9 +376,8 @@ public class SewralWords extends AppCompatActivity {
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek3.setBackgroundResource(R.drawable.wrong);
-
         }
-
+        EneblendButtonsAffterPress();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_4(View v){
@@ -403,11 +395,40 @@ public class SewralWords extends AppCompatActivity {
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.wrong);
-
         }
+        EneblendButtonsAffterPress();
     }
 
-
+    protected void EneblendButtonsAffterPress(){
+        pr1.setEnabled(true);
+        pr1.setBackgroundResource(R.drawable.forlessbutton);
+        pr2.setEnabled(true);
+        pr2.setBackgroundResource(R.drawable.forlessbutton);
+        pr3.setEnabled(true);
+        pr3.setBackgroundResource(R.drawable.forlessbutton);
+        pr4.setEnabled(true);
+        pr4.setBackgroundResource(R.drawable.forlessbutton);
+        pr5.setEnabled(true);
+        pr5.setBackgroundResource(R.drawable.forlessbutton);
+        pr6.setEnabled(true);
+        pr6.setBackgroundResource(R.drawable.forlessbutton);
+        pr7.setEnabled(true);
+        pr7.setBackgroundResource(R.drawable.forlessbutton);
+        pr8.setEnabled(true);
+        pr8.setBackgroundResource(R.drawable.forlessbutton);
+        pr9.setEnabled(true);
+        pr9.setBackgroundResource(R.drawable.forlessbutton);
+        pr10.setEnabled(true);
+        pr10.setBackgroundResource(R.drawable.forlessbutton);
+        pr11.setEnabled(true);
+        pr11.setBackgroundResource(R.drawable.forlessbutton);
+        pr12.setEnabled(true);
+        pr12.setBackgroundResource(R.drawable.forlessbutton);
+        pr13.setEnabled(true);
+        pr13.setBackgroundResource(R.drawable.forlessbutton);
+        pr14.setEnabled(true);
+        pr14.setBackgroundResource(R.drawable.forlessbutton);
+    } //кнопки снова активны и имеют исходный стиль
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -590,8 +611,8 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button1.setDuration(1500);
         button_copy_button1.start();
         ListCoordinateX_1.remove(0);
-        MainListWord.add(pr1.getText().toString());
 
+        MainListWord.add(pr1.getText().toString());
         pr1.setBackgroundResource(R.drawable.acceptbutton);
         pr1.setEnabled(false);
         textSee.setText(String.valueOf(MainListWord));
@@ -629,6 +650,11 @@ public class SewralWords extends AppCompatActivity {
         pr2.setEnabled(false);
         textSee.setText(String.valueOf(MainListWord));
 
+        MainListWord.add(pr2.getText().toString());
+        pr2.setBackgroundResource(R.drawable.acceptbutton);
+        pr2.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
+
 
     } //кнопка 2
     public void ClickButton3(View v){
@@ -646,6 +672,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button3.start();
         ListCoordinateX_1.remove(0);
 
+        MainListWord.add(pr3.getText().toString());
+        pr3.setBackgroundResource(R.drawable.acceptbutton);
+        pr3.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
+
     } //кнопка 3
     public void ClickButton4(View v){
         Button copy_pr4 = new Button(getApplicationContext());
@@ -661,6 +692,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button4.setDuration(1500);
         button_copy_button4.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr4.getText().toString());
+        pr4.setBackgroundResource(R.drawable.acceptbutton);
+        pr4.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 4
     public void ClickButton5(View v){
         Button copy_pr5 = new Button(getApplicationContext());
@@ -676,6 +712,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button5.setDuration(1500);
         button_copy_button5.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr5.getText().toString());
+        pr5.setBackgroundResource(R.drawable.acceptbutton);
+        pr5.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 5
     public void ClickButton6(View v){
         Button copy_pr6 = new Button(getApplicationContext());
@@ -691,6 +732,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button6.setDuration(1500);
         button_copy_button6.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr6.getText().toString());
+        pr6.setBackgroundResource(R.drawable.acceptbutton);
+        pr6.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 6
     public void ClickButton7(View v){
         Button copy_pr7 = new Button(getApplicationContext());
@@ -706,6 +752,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button7.setDuration(1500);
         button_copy_button7.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr7.getText().toString());
+        pr7.setBackgroundResource(R.drawable.acceptbutton);
+        pr7.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 7
     public void ClickButton8(View v){
         Button copy_pr8 = new Button(getApplicationContext());
@@ -721,6 +772,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button8.setDuration(1500);
         button_copy_button8.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr8.getText().toString());
+        pr8.setBackgroundResource(R.drawable.acceptbutton);
+        pr8.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 8
     public void ClickButton9(View v){
         Button copy_pr9 = new Button(getApplicationContext());
@@ -736,6 +792,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button9.setDuration(1500);
         button_copy_button9.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr9.getText().toString());
+        pr9.setBackgroundResource(R.drawable.acceptbutton);
+        pr9.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 9
     public void ClickButton10(View v){
         Button copy_pr10 = new Button(getApplicationContext());
@@ -751,6 +812,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button10.setDuration(1500);
         button_copy_button10.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr10.getText().toString());
+        pr10.setBackgroundResource(R.drawable.acceptbutton);
+        pr10.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 10
     public void ClickButton11(View v){
         Button copy_pr11 = new Button(getApplicationContext());
@@ -766,6 +832,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button11.setDuration(1500);
         button_copy_button11.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr11.getText().toString());
+        pr11.setBackgroundResource(R.drawable.acceptbutton);
+        pr11.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 11
     public void ClickButton12(View v){
         Button copy_pr12 = new Button(getApplicationContext());
@@ -781,6 +852,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button12.setDuration(1500);
         button_copy_button12.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr12.getText().toString());
+        pr12.setBackgroundResource(R.drawable.acceptbutton);
+        pr12.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 12
     public void ClickButton13(View v){
         Button copy_pr13 = new Button(getApplicationContext());
@@ -796,6 +872,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button13.setDuration(1500);
         button_copy_button13.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr13.getText().toString());
+        pr13.setBackgroundResource(R.drawable.acceptbutton);
+        pr13.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 13
     public void ClickButton14(View v){
         Button copy_pr14 = new Button(getApplicationContext());
@@ -811,6 +892,11 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button14.setDuration(1500);
         button_copy_button14.start();
         ListCoordinateX_1.remove(0);
+
+        MainListWord.add(pr14.getText().toString());
+        pr14.setBackgroundResource(R.drawable.acceptbutton);
+        pr14.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
     } //кнопка 14
 
 
