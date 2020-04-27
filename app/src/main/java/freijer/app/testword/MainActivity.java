@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Test(View v) {
-        Intent intent = new Intent(".animation");
+        Intent intent = new Intent(".TestAct");
         startActivity(intent);
     }
 

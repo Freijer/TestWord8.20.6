@@ -1,24 +1,18 @@
 package freijer.app.testword;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -83,21 +77,11 @@ public class SewralWords extends AppCompatActivity {
 
     protected TextView textSee;
     protected Button start, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
-    private Button chek1, chek2, chek3;
+    private Button chek1, chek2, chek3, chek4;
     private ImageView imv1, imv2, imv3, imv4;
     protected ArrayList<String> MainListWord = new ArrayList<String>();// при нажатии кнопки собисрется слово
     protected ArrayList<Integer> ListCoordinateX_1 = new ArrayList<Integer>();
-    protected ArrayList<Integer> ListCoordinateX_2 = new ArrayList<Integer>();
-    protected ArrayList<Integer> ListCoordinateX_3 = new ArrayList<Integer>();
-    protected ArrayList<Integer> ListCoordinateX_4 = new ArrayList<Integer>();
-    protected ArrayList<Integer> ListCoordinateX_5 = new ArrayList<Integer>();
-
-
     protected ArrayList<Integer> LineY_1 = new ArrayList<Integer>();
-    protected ArrayList<Integer> LineY_2 = new ArrayList<Integer>();
-    protected ArrayList<Integer> LineY_3 = new ArrayList<Integer>();
-    protected ArrayList<Integer> LineY_4 = new ArrayList<Integer>();
-
     private ArrayList<String> list;
     private ArrayList<String> listControl;
 
@@ -109,9 +93,17 @@ public class SewralWords extends AppCompatActivity {
     protected String[] OriginalWord; //бавзовое слово
     protected String[] MixedleWord; //смешение
     protected String Control;
+
+    private ConstraintLayout Colo;
+    private final int USERID = 6000;
+    private int countID;
+
     protected int numsofliteralsinword;
     protected int speed;
-    protected int shiftLiterals =40;                 //миещние букв в лево
+    protected int shiftLiterals =60;//миещние букв в лево
+    protected int baseLine = 1250; //изначальное положение строки при составлении слова нового
+    protected int shiftLine;
+
     public int getSpeed() {
         return speed;
     }
@@ -147,6 +139,7 @@ public class SewralWords extends AppCompatActivity {
         chek1 = findViewById(R.id.chek1);
         chek2 = findViewById(R.id.chek2);
         chek3 = findViewById(R.id.chek3);
+        chek4 = findViewById(R.id.chek4);
 
         imv1 = findViewById(R.id.imv1);
         imv2 = findViewById(R.id.imv2);
@@ -155,6 +148,7 @@ public class SewralWords extends AppCompatActivity {
 
 
         textSee = findViewById(R.id.textSee);
+        Colo = findViewById(R.id.Colo);
 
         ListXUpFull(); // заполняем листы координат
         ControlWordsfinFail(); // читаем проверочные слова
@@ -167,65 +161,27 @@ public class SewralWords extends AppCompatActivity {
 
         String gg = Integer.toString(numsofliteralsinword);
         textSee.setText(gg + word);
+        LineY_1.add(1250);
     }
 
     public void ListXUpFull(){
 // Первое словор по горзинотале
-        ListCoordinateX_1.add(0);
-        ListCoordinateX_1.add(100-shiftLiterals);
-        ListCoordinateX_1.add(180-shiftLiterals);
-        ListCoordinateX_1.add(260-shiftLiterals);
-        ListCoordinateX_1.add(340-shiftLiterals);
-        ListCoordinateX_1.add(420-shiftLiterals);
-        ListCoordinateX_1.add(500-shiftLiterals);
-        ListCoordinateX_1.add(580-shiftLiterals);
-        ListCoordinateX_1.add(660-shiftLiterals);
-        ListCoordinateX_1.add(740-shiftLiterals);
-        ListCoordinateX_1.add(820-shiftLiterals);
-        ListCoordinateX_1.add(900-shiftLiterals);
-        ListCoordinateX_1.add(980-shiftLiterals);
-        ListCoordinateX_1.add(1060-shiftLiterals);
-// первое слово по высоте
-        LineY_1.add(1250);
+        ListCoordinateX_1.add(0-40);
+        ListCoordinateX_1.add(100-this.shiftLiterals);
+        ListCoordinateX_1.add(180-this.shiftLiterals);
+        ListCoordinateX_1.add(260-this.shiftLiterals);
+        ListCoordinateX_1.add(340-this.shiftLiterals);
+        ListCoordinateX_1.add(420-this.shiftLiterals);
+        ListCoordinateX_1.add(500-this.shiftLiterals);
+        ListCoordinateX_1.add(580-this.shiftLiterals);
+        ListCoordinateX_1.add(660-this.shiftLiterals);
+        ListCoordinateX_1.add(740-this.shiftLiterals);
+        ListCoordinateX_1.add(820-this.shiftLiterals);
+        ListCoordinateX_1.add(900-this.shiftLiterals);
+        ListCoordinateX_1.add(980-this.shiftLiterals);
+        ListCoordinateX_1.add(1060-this.shiftLiterals);
     } //координаты для первого слова
-    public void ListXUpFull_2(){
-// Второе словор по горзинотале
-        ListCoordinateX_1.add(0);
-        ListCoordinateX_1.add(100-20);
-        ListCoordinateX_1.add(180-20);
-        ListCoordinateX_1.add(260-20);
-        ListCoordinateX_1.add(340-20);
-        ListCoordinateX_1.add(420-20);
-        ListCoordinateX_1.add(500-20);
-        ListCoordinateX_1.add(580-20);
-        ListCoordinateX_1.add(660-20);
-        ListCoordinateX_1.add(740-20);
-        ListCoordinateX_1.add(820-20);
-        ListCoordinateX_1.add(900-20);
-        ListCoordinateX_1.add(980-20);
-        ListCoordinateX_1.add(1060-20);
-//второе слово по высоте
-        LineY_2.add(1550);
-    } //координаты второго слова
-    public void ListXUpFull_3(){
-// Третье словор по горзинотале
-        ListCoordinateX_1.add(0);
-        ListCoordinateX_1.add(100-20);
-        ListCoordinateX_1.add(180-20);
-        ListCoordinateX_1.add(260-20);
-        ListCoordinateX_1.add(340-20);
-        ListCoordinateX_1.add(420-20);
-        ListCoordinateX_1.add(500-20);
-        ListCoordinateX_1.add(580-20);
-        ListCoordinateX_1.add(660-20);
-        ListCoordinateX_1.add(740-20);
-        ListCoordinateX_1.add(820-20);
-        ListCoordinateX_1.add(900-20);
-        ListCoordinateX_1.add(980-20);
-        ListCoordinateX_1.add(1060-20);
-// третье слово по высоте
-        LineY_3.add(1700);
-    } // координаты третьего слова
+
     public void GoneButnnons(){
         pr1.setVisibility(View.GONE);
         pr2.setVisibility(View.GONE);
@@ -271,8 +227,8 @@ public class SewralWords extends AppCompatActivity {
                 pr10.setVisibility(View.VISIBLE);
                 pr11.setVisibility(View.VISIBLE);
                 pr12.setVisibility(View.VISIBLE);
-//                pr13.setVisibility(View.VISIBLE);
-//                pr14.setVisibility(View.VISIBLE);
+                pr13.setVisibility(View.VISIBLE);
+                pr14.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -362,47 +318,96 @@ public class SewralWords extends AppCompatActivity {
                 pr14.setText(String.valueOf(MixedleWord[13]));
                 break;
         }
-
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void Verify() {
-
-        String[] array = MainListWord.toArray(new String[0]);
-        String Key = (String.join("", array));
-        LineY_1.add(1400);
-        LineY_2.add(1550);
-        LineY_3.add(1700);
-/*
-        int scope = Integer.valueOf(MainListWord.size());
-        switch (scope){
-            case 1:
-
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-
-        }
-*/
-
-        if (Key.equals(Control)) {
-
-        }
-
-
-    }
-
-
     public void Chek_1(View v){
-        chek1.setBackgroundResource(R.drawable.thrue);
+
+        String[] ArrayListWord = MainListWord.toArray(new String[0]);
+        String KeyWord = (String.join("", ArrayListWord));
+        if (listControl.contains(KeyWord)) {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1420);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek1.setBackgroundResource(R.drawable.thrue);
+        } else {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1420);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek1.setBackgroundResource(R.drawable.wrong);
+        }
+        pr1.setEnabled(true);
+        pr1.setBackgroundResource(R.drawable.forlessbutton);
+        pr2.setEnabled(true);
+
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void Chek_2(View v){
+        String[] ArrayListWord = MainListWord.toArray(new String[0]);
+        String KeyWord = (String.join("", ArrayListWord));
+        if (listControl.contains(KeyWord)) {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1620);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek2.setBackgroundResource(R.drawable.thrue);
+
+
+
+
+        } else {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1620);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek2.setBackgroundResource(R.drawable.wrong);
+
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void Chek_3(View v){
+        String[] ArrayListWord = MainListWord.toArray(new String[0]);
+        String KeyWord = (String.join("", ArrayListWord));
+        if (listControl.contains(KeyWord)) {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1820);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek3.setBackgroundResource(R.drawable.thrue);
+        } else {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1820);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek3.setBackgroundResource(R.drawable.wrong);
+
+        }
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void Chek_4(View v){
+        String[] ArrayListWord = MainListWord.toArray(new String[0]);
+        String KeyWord = (String.join("", ArrayListWord));
+        if (listControl.contains(KeyWord)) {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(2020);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek4.setBackgroundResource(R.drawable.thrue);
+        } else {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(2020);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek4.setBackgroundResource(R.drawable.wrong);
+
+        }
+    }
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -572,161 +577,240 @@ public class SewralWords extends AppCompatActivity {
 
     } //движение кнопок
     public void ClickButton1(View v){
-        button1.end();
-        // какже ты меня задрал FastOutLinearInInterpolator
-        button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
+        Button copy_pr1 = new Button(getApplicationContext());
+        copy_pr1.setBackgroundResource(R.drawable.newpate);
+        copy_pr1.setText(pr1.getText().toString() );
+
+        copy_pr1.setId(USERID + countID);
+        Colo.addView(copy_pr1);
+        countID++;
+        ObjectAnimator button_copy_button1 = ObjectAnimator.ofPropertyValuesHolder(copy_pr1,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button1.setDuration(3000);
-        pr1.setBackgroundResource(R.drawable.newchangebutton);
-        button1.start();
+        button_copy_button1.setDuration(1500);
+        button_copy_button1.start();
         ListCoordinateX_1.remove(0);
+        MainListWord.add(pr1.getText().toString());
+
+        pr1.setBackgroundResource(R.drawable.acceptbutton);
         pr1.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
+
+
 
     } //кнопка 1
     public void ClickButton2(View v){
-                 button2.end();
-                 button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
+//                 button2.end();
+//                 button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
+//                PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
+//                PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
+//        button2.setDuration(3000);
+//        pr2.setBackgroundResource(R.drawable.newchangebutton);
+//        button2.start();
+//        ListCoordinateX_1.remove(0);
+//        MainListWord.add(pr2.getText().toString());
+//        textSee.setText(String.valueOf(MainListWord));
+//        pr2.setEnabled(false);
+
+        Button copy_pr2 = new Button(getApplicationContext());
+        copy_pr2.setBackgroundResource(R.drawable.newpate);
+        copy_pr2.setText(pr2.getText().toString() );
+
+        copy_pr2.setId(USERID + countID);
+        Colo.addView(copy_pr2);
+        countID++;
+        ObjectAnimator button_copy_button2 = ObjectAnimator.ofPropertyValuesHolder(copy_pr2,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button2.setDuration(3000);
-        pr2.setBackgroundResource(R.drawable.newchangebutton);
-        button2.start();
+        button_copy_button2.setDuration(1500);
+        button_copy_button2.start();
         ListCoordinateX_1.remove(0);
+        MainListWord.add(pr2.getText().toString());
         pr2.setEnabled(false);
+        textSee.setText(String.valueOf(MainListWord));
+
+
     } //кнопка 2
     public void ClickButton3(View v){
-        button3.end();
-        button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
+        Button copy_pr3 = new Button(getApplicationContext());
+        copy_pr3.setBackgroundResource(R.drawable.newpate);
+        copy_pr3.setText(pr3.getText().toString() );
+
+        copy_pr3.setId(USERID + countID);
+        Colo.addView(copy_pr3);
+        countID++;
+        ObjectAnimator button_copy_button3 = ObjectAnimator.ofPropertyValuesHolder(copy_pr3,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button3.setDuration(3000);
-        pr3.setBackgroundResource(R.drawable.newchangebutton);
-        button3.start();
+        button_copy_button3.setDuration(1500);
+        button_copy_button3.start();
         ListCoordinateX_1.remove(0);
-        pr3.setEnabled(false);
 
     } //кнопка 3
     public void ClickButton4(View v){
-        button4.end();
-        button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
+        Button copy_pr4 = new Button(getApplicationContext());
+        copy_pr4.setBackgroundResource(R.drawable.newpate);
+        copy_pr4.setText(pr4.getText().toString() );
+
+        copy_pr4.setId(USERID + countID);
+        Colo.addView(copy_pr4);
+        countID++;
+        ObjectAnimator button_copy_button4 = ObjectAnimator.ofPropertyValuesHolder(copy_pr4,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button4.setDuration(3000);
-        pr4.setBackgroundResource(R.drawable.newchangebutton);
-        button4.start();
+        button_copy_button4.setDuration(1500);
+        button_copy_button4.start();
         ListCoordinateX_1.remove(0);
-        pr4.setEnabled(false);
     } //кнопка 4
     public void ClickButton5(View v){
-        button5.end();
-        button5 = ObjectAnimator.ofPropertyValuesHolder(pr5,
+        Button copy_pr5 = new Button(getApplicationContext());
+        copy_pr5.setBackgroundResource(R.drawable.newpate);
+        copy_pr5.setText(pr5.getText().toString() );
+
+        copy_pr5.setId(USERID + countID);
+        Colo.addView(copy_pr5);
+        countID++;
+        ObjectAnimator button_copy_button5 = ObjectAnimator.ofPropertyValuesHolder(copy_pr5,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button5.setDuration(3000);
-        pr5.setBackgroundResource(R.drawable.newchangebutton);
-        button5.start();
+        button_copy_button5.setDuration(1500);
+        button_copy_button5.start();
         ListCoordinateX_1.remove(0);
-        pr5.setEnabled(false);
     } //кнопка 5
     public void ClickButton6(View v){
-        button6.end();
-        button6 = ObjectAnimator.ofPropertyValuesHolder(pr6,
+        Button copy_pr6 = new Button(getApplicationContext());
+        copy_pr6.setBackgroundResource(R.drawable.newpate);
+        copy_pr6.setText(pr6.getText().toString() );
+
+        copy_pr6.setId(USERID + countID);
+        Colo.addView(copy_pr6);
+        countID++;
+        ObjectAnimator button_copy_button6 = ObjectAnimator.ofPropertyValuesHolder(copy_pr6,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button6.setDuration(3000);
-        pr6.setBackgroundResource(R.drawable.newchangebutton);
-        button6.start();
+        button_copy_button6.setDuration(1500);
+        button_copy_button6.start();
         ListCoordinateX_1.remove(0);
-        pr6.setEnabled(false);
     } //кнопка 6
     public void ClickButton7(View v){
-        button7.end();
-        button7 = ObjectAnimator.ofPropertyValuesHolder(pr7,
+        Button copy_pr7 = new Button(getApplicationContext());
+        copy_pr7.setBackgroundResource(R.drawable.newpate);
+        copy_pr7.setText(pr7.getText().toString() );
+
+        copy_pr7.setId(USERID + countID);
+        Colo.addView(copy_pr7);
+        countID++;
+        ObjectAnimator button_copy_button7 = ObjectAnimator.ofPropertyValuesHolder(copy_pr7,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button7.setDuration(3000);
-        pr7.setBackgroundResource(R.drawable.newchangebutton);
-        button7.start();
+        button_copy_button7.setDuration(1500);
+        button_copy_button7.start();
         ListCoordinateX_1.remove(0);
-        pr7.setEnabled(false);
     } //кнопка 7
     public void ClickButton8(View v){
-        button8.end();
-        button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
+        Button copy_pr8 = new Button(getApplicationContext());
+        copy_pr8.setBackgroundResource(R.drawable.newpate);
+        copy_pr8.setText(pr8.getText().toString() );
+
+        copy_pr8.setId(USERID + countID);
+        Colo.addView(copy_pr8);
+        countID++;
+        ObjectAnimator button_copy_button8 = ObjectAnimator.ofPropertyValuesHolder(copy_pr8,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button8.setDuration(3000);
-        pr8.setBackgroundResource(R.drawable.newchangebutton);
-        button8.start();
+        button_copy_button8.setDuration(1500);
+        button_copy_button8.start();
         ListCoordinateX_1.remove(0);
-        pr8.setEnabled(false);
     } //кнопка 8
     public void ClickButton9(View v){
-        button9.end();
-        button9 = ObjectAnimator.ofPropertyValuesHolder(pr9,
+        Button copy_pr9 = new Button(getApplicationContext());
+        copy_pr9.setBackgroundResource(R.drawable.newpate);
+        copy_pr9.setText(pr9.getText().toString() );
+
+        copy_pr9.setId(USERID + countID);
+        Colo.addView(copy_pr9);
+        countID++;
+        ObjectAnimator button_copy_button9 = ObjectAnimator.ofPropertyValuesHolder(copy_pr9,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button9.setDuration(3000);
-        pr9.setBackgroundResource(R.drawable.newchangebutton);
-        button9.start();
+        button_copy_button9.setDuration(1500);
+        button_copy_button9.start();
         ListCoordinateX_1.remove(0);
-        pr9.setEnabled(false);
     } //кнопка 9
     public void ClickButton10(View v){
-        button10.end();
-        button10 = ObjectAnimator.ofPropertyValuesHolder(pr10,
+        Button copy_pr10 = new Button(getApplicationContext());
+        copy_pr10.setBackgroundResource(R.drawable.newpate);
+        copy_pr10.setText(pr10.getText().toString() );
+
+        copy_pr10.setId(USERID + countID);
+        Colo.addView(copy_pr10);
+        countID++;
+        ObjectAnimator button_copy_button10 = ObjectAnimator.ofPropertyValuesHolder(copy_pr10,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button10.setDuration(3000);
-        pr10.setBackgroundResource(R.drawable.newchangebutton);
-        button10.start();
+        button_copy_button10.setDuration(1500);
+        button_copy_button10.start();
         ListCoordinateX_1.remove(0);
-        pr10.setEnabled(false);
     } //кнопка 10
     public void ClickButton11(View v){
-        button11.end();
-        button11 = ObjectAnimator.ofPropertyValuesHolder(pr11,
+        Button copy_pr11 = new Button(getApplicationContext());
+        copy_pr11.setBackgroundResource(R.drawable.newpate);
+        copy_pr11.setText(pr11.getText().toString() );
+
+        copy_pr11.setId(USERID + countID);
+        Colo.addView(copy_pr11);
+        countID++;
+        ObjectAnimator button_copy_button11 = ObjectAnimator.ofPropertyValuesHolder(copy_pr11,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button11.setDuration(3000);
-        pr11.setBackgroundResource(R.drawable.newchangebutton);
-        button11.start();
+        button_copy_button11.setDuration(1500);
+        button_copy_button11.start();
         ListCoordinateX_1.remove(0);
-        pr11.setEnabled(false);
     } //кнопка 11
     public void ClickButton12(View v){
-        button12.end();
-        button12 = ObjectAnimator.ofPropertyValuesHolder(pr12,
+        Button copy_pr12 = new Button(getApplicationContext());
+        copy_pr12.setBackgroundResource(R.drawable.newpate);
+        copy_pr12.setText(pr12.getText().toString() );
+
+        copy_pr12.setId(USERID + countID);
+        Colo.addView(copy_pr12);
+        countID++;
+        ObjectAnimator button_copy_button12 = ObjectAnimator.ofPropertyValuesHolder(copy_pr12,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button12.setDuration(3000);
-        pr12.setBackgroundResource(R.drawable.newchangebutton);
-        button12.start();
+        button_copy_button12.setDuration(1500);
+        button_copy_button12.start();
         ListCoordinateX_1.remove(0);
-        pr12.setEnabled(false);
     } //кнопка 12
     public void ClickButton13(View v){
-        button13.end();
-        button13 = ObjectAnimator.ofPropertyValuesHolder(pr13,
+        Button copy_pr13 = new Button(getApplicationContext());
+        copy_pr13.setBackgroundResource(R.drawable.newpate);
+        copy_pr13.setText(pr13.getText().toString() );
+
+        copy_pr13.setId(USERID + countID);
+        Colo.addView(copy_pr13);
+        countID++;
+        ObjectAnimator button_copy_button13 = ObjectAnimator.ofPropertyValuesHolder(copy_pr13,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button13.setDuration(3000);
-        pr13.setBackgroundResource(R.drawable.newchangebutton);
-        button13.start();
+        button_copy_button13.setDuration(1500);
+        button_copy_button13.start();
         ListCoordinateX_1.remove(0);
-        pr13.setEnabled(false);
     } //кнопка 13
     public void ClickButton14(View v){
-        button14.end();
-        button14 = ObjectAnimator.ofPropertyValuesHolder(pr14,
+        Button copy_pr14 = new Button(getApplicationContext());
+        copy_pr14.setBackgroundResource(R.drawable.newpate);
+        copy_pr14.setText(pr14.getText().toString() );
+
+        copy_pr14.setId(USERID + countID);
+        Colo.addView(copy_pr14);
+        countID++;
+        ObjectAnimator button_copy_button14 = ObjectAnimator.ofPropertyValuesHolder(copy_pr14,
                 PropertyValuesHolder.ofFloat("x", ListCoordinateX_1.get(0)),
                 PropertyValuesHolder.ofFloat("y", LineY_1.get(0)));
-        button14.setDuration(3000);
-        pr14.setBackgroundResource(R.drawable.newchangebutton);
-        button14.start();
+        button_copy_button14.setDuration(1500);
+        button_copy_button14.start();
         ListCoordinateX_1.remove(0);
-        pr14.setEnabled(false);
     } //кнопка 14
 
 

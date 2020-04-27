@@ -9,9 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".TestAct">
+            <intent-filter>
+                <action android:name=".TestAct" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SewralWords">
             <intent-filter>
                 <action android:name=".SewralWords" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -27,13 +35,6 @@
         <activity android:name=".Dropwords">
             <intent-filter>
                 <action android:name=".Dropwords" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".animation">
-            <intent-filter>
-                <action android:name=".animation" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -58,6 +59,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
