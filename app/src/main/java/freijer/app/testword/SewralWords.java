@@ -16,10 +16,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -84,6 +86,7 @@ public class SewralWords extends AppCompatActivity {
     protected ArrayList<Integer> LineY_1 = new ArrayList<Integer>();
     private ArrayList<String> list;
     private ArrayList<String> listControl;
+    protected ArrayList<String> listBuffer = new ArrayList<String>();;
 
     private int indexWord;
     private String word;
@@ -318,85 +321,130 @@ public class SewralWords extends AppCompatActivity {
                 pr14.setText(String.valueOf(MixedleWord[13]));
                 break;
         }
-    }
+    } //назначаем буквы на кнопки
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_1(View v){
-
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
-        if (listControl.contains(KeyWord)) {
+        if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
             this.LineY_1.remove(0);
             this.LineY_1.add(1420);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek1.setBackgroundResource(R.drawable.thrue);
-        } else {
+        } else if (listBuffer.contains(KeyWord)){
             this.LineY_1.remove(0);
             this.LineY_1.add(1420);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek1.setBackgroundResource(R.drawable.wrong);
+            Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+        }  else  {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1420);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek2.setBackgroundResource(R.drawable.wrong);
+
         }
         EneblendButtonsAffterPress();
+        listBuffer.add(KeyWord);
+        MainListWord.removeAll(MainListWord);
+        textSee.setText(String.valueOf(MainListWord));
+
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_2(View v){
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
-        if (listControl.contains(KeyWord)) {
+        if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
             this.LineY_1.remove(0);
             this.LineY_1.add(1620);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.thrue);
-        } else {
+        } else if (listBuffer.contains(KeyWord)){
             this.LineY_1.remove(0);
             this.LineY_1.add(1620);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.wrong);
+            Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+        }  else  {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1620);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek2.setBackgroundResource(R.drawable.wrong);
+
         }
         EneblendButtonsAffterPress();
+        listBuffer.add(KeyWord);
+        MainListWord.removeAll(MainListWord);
+        textSee.setText(String.valueOf(MainListWord));
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_3(View v){
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
-        if (listControl.contains(KeyWord)) {
+        if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
             this.LineY_1.remove(0);
             this.LineY_1.add(1820);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
-            chek3.setBackgroundResource(R.drawable.thrue);
-        } else {
+            chek2.setBackgroundResource(R.drawable.thrue);
+        } else if (listBuffer.contains(KeyWord)){
             this.LineY_1.remove(0);
             this.LineY_1.add(1820);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek3.setBackgroundResource(R.drawable.wrong);
+            Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+        }  else  {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(1820);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek3.setBackgroundResource(R.drawable.wrong);
+
         }
         EneblendButtonsAffterPress();
+        listBuffer.add(KeyWord);
+        MainListWord.removeAll(MainListWord);
+        textSee.setText(String.valueOf(MainListWord));
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_4(View v){
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
-        if (listControl.contains(KeyWord)) {
+        if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
             this.LineY_1.remove(0);
             this.LineY_1.add(2020);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.thrue);
-        } else {
+        } else if (listBuffer.contains(KeyWord)){
             this.LineY_1.remove(0);
             this.LineY_1.add(2020);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.wrong);
+            Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+        }  else  {
+            this.LineY_1.remove(0);
+            this.LineY_1.add(2020);
+            this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
+            ListXUpFull();
+            chek4.setBackgroundResource(R.drawable.wrong);
+
         }
         EneblendButtonsAffterPress();
+        listBuffer.add(KeyWord);
+        MainListWord.removeAll(MainListWord);
+        textSee.setText(String.valueOf(MainListWord));
     }
 
     protected void EneblendButtonsAffterPress(){
@@ -646,9 +694,6 @@ public class SewralWords extends AppCompatActivity {
         button_copy_button2.setDuration(1500);
         button_copy_button2.start();
         ListCoordinateX_1.remove(0);
-        MainListWord.add(pr2.getText().toString());
-        pr2.setEnabled(false);
-        textSee.setText(String.valueOf(MainListWord));
 
         MainListWord.add(pr2.getText().toString());
         pr2.setBackgroundResource(R.drawable.acceptbutton);
