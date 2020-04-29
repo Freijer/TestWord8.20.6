@@ -3,70 +3,65 @@ package freijer.app.testword;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class TestAct extends AppCompatActivity {
 
-    private Button button, button2;
-    private ConstraintLayout Colo;
+    protected ArrayList<Integer> ListCoordinateX_1 = new ArrayList<Integer>();
+    private Button b1;
+    ObjectAnimator anim;
+    protected AnimatorSet set1;
 
-
-    private final int USERID = 6000;
-    private int countID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        button =  findViewById(R.id.button);
-        button2 =  findViewById(R.id.button2);
 
-        button.setBackgroundResource(R.drawable.newchangebutton);
-        button2.setBackgroundResource(R.drawable.newchangebutton);
-        Colo = findViewById(R.id.Colo);
+        b1 = findViewById(R.id.b1);
+//        b1.setX(100);
+//        b1.setY(300);
+
+        ListCoordinateX_1.add(R.anim.spot_one);
+
+        float scale = b1.getResources().getDisplayMetrics().density;
+        float C = 0 * scale;
+        float C1 = 280 * scale;
+        float V = 0 * scale;
+        float V1 = 630 * scale;
+
+//        Animation a4 = AnimationUtils.loadAnimation(this, ListCoordinateX_1.get(0));
+//        b1.startAnimation(a4);
+
+
+        //задать движение через xml общимие ккоориднаты
+
+
+        ObjectAnimator button10 = ObjectAnimator.ofPropertyValuesHolder(b1,
+                PropertyValuesHolder.ofFloat("x", C, C1),
+                PropertyValuesHolder.ofFloat("y", V, V1));
+        button10.setDuration(7000);
+        button10.setRepeatCount(ObjectAnimator.INFINITE);
+        button10.setRepeatMode(ObjectAnimator.REVERSE);
+        button10.start();
+
 
 
     }
 
-    public void Cheekl(View v){
-        Button b = new Button(getApplicationContext());
-        b.setBackgroundResource(R.drawable.newpate);
-        b.setText(b.getText().toString() + Integer.toString(countID + 1));
-
-        b.setId(USERID + countID);
-
-        Colo.addView(b);
-        countID++;
-
-        ObjectAnimator button1 = ObjectAnimator.ofPropertyValuesHolder(b,
-                PropertyValuesHolder.ofFloat("x", -100, 150),
-                PropertyValuesHolder.ofFloat("y", 600, 600));
-        button1.setDuration(1500);
-        button1.start();
-    }
-    public void Cheek2(View v){
-        Button b = new Button(getApplicationContext());
-        b.setBackgroundResource(R.drawable.newpate);
-        b.setText(b.getText().toString() + Integer.toString(countID + 1));
-
-        b.setId(USERID + countID);
-
-        Colo.addView(b);
-        countID++;
-
-        ObjectAnimator button1 = ObjectAnimator.ofPropertyValuesHolder(b,
-                PropertyValuesHolder.ofFloat("x", -100, 260),
-                PropertyValuesHolder.ofFloat("y", 600, 600));
-        button1.setDuration(1500);
-        button1.start();
-    }
 
 }

@@ -1,32 +1,44 @@
 package freijer.app.testword;
 
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Point;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Build;
-import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import static android.view.View.Y;
+import static android.view.View.Z;
 
 public class SewralWords extends AppCompatActivity {
 
@@ -62,6 +74,10 @@ public class SewralWords extends AppCompatActivity {
     // цветные поллоски поместить в Кард или ресайклВтю что ы можно было их прокручивать
 
 
+
+    int y1;
+    protected int f001;
+
     ObjectAnimator  button1;
     ObjectAnimator  button2;
     ObjectAnimator  button3;
@@ -77,16 +93,27 @@ public class SewralWords extends AppCompatActivity {
     ObjectAnimator  button13;
     ObjectAnimator  button14;
 
-    protected TextView textSee;
-    protected Button start, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
+    protected TextView textSee, textClock, score;
+    protected Button faq, start, starter, reset, pr1, pr2, pr3, pr4, pr5, pr6, pr7, pr8, pr9, pr10, pr11, pr12, pr13, pr14;
+    protected Button copy_pr1, copy_pr2, copy_pr3, copy_pr4, copy_pr5, copy_pr6, copy_pr7, copy_pr8, copy_pr9, copy_pr10, copy_pr11, copy_pr12, copy_pr13, copy_pr14;
     private Button chek1, chek2, chek3, chek4;
-    private ImageView imv1, imv2, imv3, imv4;
+    private ImageView imv1, imv2, imv3, imv4, clock;
     protected ArrayList<String> MainListWord = new ArrayList<String>();// при нажатии кнопки собисрется слово
     protected ArrayList<Integer> ListCoordinateX_1 = new ArrayList<Integer>();
     protected ArrayList<Integer> LineY_1 = new ArrayList<Integer>();
     private ArrayList<String> list;
     private ArrayList<String> listControl;
     protected ArrayList<String> listBuffer = new ArrayList<String>();;
+
+    int counter;
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
 
     private int indexWord;
     private String word;
@@ -104,25 +131,29 @@ public class SewralWords extends AppCompatActivity {
     protected int numsofliteralsinword;
     protected int speed;
     protected int shiftLiterals =60;//миещние букв в лево
-    protected int baseLine = 1250; //изначальное положение строки при составлении слова нового
-    protected int shiftLine;
 
     public int getSpeed() {
         return speed;
     }
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
+    public Point viewLocatedAt(View v) {
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+        int x = location[0];
+        int y = location[1];
+        return new Point(x, y);
+    } //определние координат
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sewral_words);
-
-
-
         pr1 = findViewById(R.id.pr1);
         pr2 = findViewById(R.id.pr2);
         pr3 = findViewById(R.id.pr3);
@@ -137,7 +168,8 @@ public class SewralWords extends AppCompatActivity {
         pr12 = findViewById(R.id.pr12);
         pr13 = findViewById(R.id.pr13);
         pr14 = findViewById(R.id.pr14);
-        start = findViewById(R.id.start);
+        starter = findViewById(R.id.starter);
+        faq = findViewById(R.id.faq);
 
         chek1 = findViewById(R.id.chek1);
         chek2 = findViewById(R.id.chek2);
@@ -148,9 +180,12 @@ public class SewralWords extends AppCompatActivity {
         imv2 = findViewById(R.id.imv2);
         imv3 = findViewById(R.id.imv3);
         imv4 = findViewById(R.id.imv4);
+        clock = findViewById(R.id.clock);
 
 
         textSee = findViewById(R.id.textSee);
+        score = findViewById(R.id.score);
+        textClock = findViewById(R.id.textClock);
         Colo = findViewById(R.id.Colo);
 
         ListXUpFull(); // заполняем листы координат
@@ -158,14 +193,15 @@ public class SewralWords extends AppCompatActivity {
         ReadWords(); // читаем ключевык
         Randomizator(); // разиваем на буквы
         GoneButnnons(); //все кнопки изначально не видимы
-        ShowButtons(); // услвие появление кнопок зависитот кол-ва букв в слове
+//        ShowButtons(); // услвие появление кнопок зависитот кол-ва букв в слове
         SetLiteralsonButtons(); //установка букв на слова
         Creates(); //активация и движеение кнопок
-
         String gg = Integer.toString(numsofliteralsinword);
         textSee.setText(gg + word);
-        LineY_1.add(1250);
     }
+
+
+
 
     public void ListXUpFull(){
 // Первое словор по горзинотале
@@ -183,6 +219,9 @@ public class SewralWords extends AppCompatActivity {
         ListCoordinateX_1.add(900-this.shiftLiterals);
         ListCoordinateX_1.add(980-this.shiftLiterals);
         ListCoordinateX_1.add(1060-this.shiftLiterals);
+
+
+
     } //координаты для первого слова
 
     public void GoneButnnons(){
@@ -200,8 +239,23 @@ public class SewralWords extends AppCompatActivity {
         pr12.setVisibility(View.GONE);
         pr13.setVisibility(View.GONE);
         pr14.setVisibility(View.GONE);
-    }
 
+        chek1.setVisibility(View.GONE);
+        chek2.setVisibility(View.GONE);
+        chek3.setVisibility(View.GONE);
+        chek4.setVisibility(View.GONE);
+
+        imv1.setVisibility(View.GONE);
+        imv2.setVisibility(View.GONE);
+        imv3.setVisibility(View.GONE);
+        imv4.setVisibility(View.GONE);
+        clock.setVisibility(View.GONE);
+
+
+        textSee.setVisibility(View.GONE);
+        textClock.setVisibility(View.GONE);
+
+    }
     public void ShowButtons(){
         switch (numsofliteralsinword){
             case 11:
@@ -234,7 +288,19 @@ public class SewralWords extends AppCompatActivity {
                 pr14.setVisibility(View.VISIBLE);
                 break;
         }
+        chek1.setVisibility(View.VISIBLE);
+        chek2.setVisibility(View.VISIBLE);
+        chek3.setVisibility(View.VISIBLE);
+        chek4.setVisibility(View.VISIBLE);
 
+        imv1.setVisibility(View.VISIBLE);
+        imv2.setVisibility(View.VISIBLE);
+        imv3.setVisibility(View.VISIBLE);
+        imv4.setVisibility(View.VISIBLE);
+        clock.setVisibility(View.VISIBLE);
+        textSee.setVisibility(View.VISIBLE);
+        textClock.setVisibility(View.VISIBLE);
+        starter.setVisibility(View.GONE);
     }
     public void ReadWords(){
         try {
@@ -292,18 +358,18 @@ public class SewralWords extends AppCompatActivity {
     protected void SetLiteralsonButtons(){
         switch (numsofliteralsinword) {
             case 11:
-            pr1.setText(String.valueOf(MixedleWord[0]));
-            pr2.setText(String.valueOf(MixedleWord[1]));
-            pr3.setText(String.valueOf(MixedleWord[2]));
-            pr4.setText(String.valueOf(MixedleWord[3]));
-            pr5.setText(String.valueOf(MixedleWord[4]));
-            pr6.setText(String.valueOf(MixedleWord[5]));
-            pr7.setText(String.valueOf(MixedleWord[6]));
-            pr8.setText(String.valueOf(MixedleWord[7]));
-            pr9.setText(String.valueOf(MixedleWord[8]));
-            pr10.setText(String.valueOf(MixedleWord[9]));
-            pr11.setText(String.valueOf(MixedleWord[10]));
-         break;
+                pr1.setText(String.valueOf(MixedleWord[0]));
+                pr2.setText(String.valueOf(MixedleWord[1]));
+                pr3.setText(String.valueOf(MixedleWord[2]));
+                pr4.setText(String.valueOf(MixedleWord[3]));
+                pr5.setText(String.valueOf(MixedleWord[4]));
+                pr6.setText(String.valueOf(MixedleWord[5]));
+                pr7.setText(String.valueOf(MixedleWord[6]));
+                pr8.setText(String.valueOf(MixedleWord[7]));
+                pr9.setText(String.valueOf(MixedleWord[8]));
+                pr10.setText(String.valueOf(MixedleWord[9]));
+                pr11.setText(String.valueOf(MixedleWord[10]));
+                break;
             case 14:
                 pr1.setText(String.valueOf(MixedleWord[0]));
                 pr2.setText(String.valueOf(MixedleWord[1]));
@@ -324,31 +390,143 @@ public class SewralWords extends AppCompatActivity {
     } //назначаем буквы на кнопки
 
 
+    public void onClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SewralWords.this);
+        builder.setTitle("     Инструкция")
+                .setMessage("По экрану движутся кнопки, нажимая на них ВЫ собираете слова, которые выстраиваются по цветным линиям. Собрал слово - нажал на галочку." + "\n"  +
+                        "слово  меньше 3 букв - 1очко" + "\n"  +
+                        "3 буквы +1" + "\n"  +
+                        "4 буквы +2 " + "\n"  +
+                        "5 букв +3" + "\n"  +
+                        "6 букв +4" + "\n"  +
+                        "каждое не правильное слово так же -1 очко")
+                .setCancelable(false)
+                .setNegativeButton("Все понятно, создатель этого приложения гений!",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    } //Всплывабщее окно
+
+    public void LetsGo(View v){
+        ShowButtons();
+        starter.setVisibility(View.GONE);
+        button1.start();
+        button2.start();
+        button3.start();
+        button4.start();
+        button5.start();
+        button6.start();
+        button7.start();
+        button8.start();
+        button9.start();
+        button10.start();
+        button11.start();
+        button12.start();
+        button13.start();
+        button14.start();
+        new CountDownTimer(100000, 1000) {
+            @SuppressLint("SetTextI18n")
+            public void onTick(long millisUntilFinished) {
+                textClock.setText("Сек :" + millisUntilFinished / 1000);
+            }
+            public void onFinish() {
+                textClock.setText("done!");
+                GoneButnnons();
+                copy_pr1.setVisibility(View.GONE);
+                copy_pr2.setVisibility(View.GONE);
+                copy_pr3.setVisibility(View.GONE);
+                copy_pr4.setVisibility(View.GONE);
+                copy_pr5.setVisibility(View.GONE);
+                copy_pr6.setVisibility(View.GONE);
+                copy_pr7.setVisibility(View.GONE);
+                copy_pr8.setVisibility(View.GONE);
+                copy_pr9.setVisibility(View.GONE);
+                copy_pr10.setVisibility(View.GONE);
+                copy_pr11.setVisibility(View.GONE);
+                copy_pr12.setVisibility(View.GONE);
+                copy_pr13.setVisibility(View.GONE);
+                copy_pr14.setVisibility(View.GONE);
+
+            }
+        }.start();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                f001 = viewLocatedAt(imv1).y - (imv1.getHeight()/4 );
+                LineY_1.clear();
+                LineY_1.add(f001);
+            }
+        }, 500);
+
+    }  // СТАРТ
+
+
+
+    protected void HowScore(int A){
+        switch (A){
+            case 2:
+                setCounter(getCounter()-1);
+                break;
+            case 3:
+                setCounter(getCounter()+1);
+                break;
+            case 4:
+                setCounter(getCounter()+2);
+                break;
+            case 5:
+                setCounter(getCounter()+3);
+            case 6:
+                setCounter(getCounter()+4);
+                break;
+        }
+    }//подсчет очков
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Chek_1(View v){
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
         if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1420);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1420);
+            this.f001 = viewLocatedAt(imv2).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek1.setBackgroundResource(R.drawable.thrue);
+            HowScore(ArrayListWord.length);
+            score.setText(""+getCounter());
+
+
         } else if (listBuffer.contains(KeyWord)){
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1420);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1420);
+            this.f001 = viewLocatedAt(imv2).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek1.setBackgroundResource(R.drawable.wrong);
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
             Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
         }  else  {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1420);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1420);
+            this.f001 = viewLocatedAt(imv2).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
-            chek2.setBackgroundResource(R.drawable.wrong);
-
+            chek1.setBackgroundResource(R.drawable.wrong);
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }
         EneblendButtonsAffterPress();
         listBuffer.add(KeyWord);
@@ -361,25 +539,39 @@ public class SewralWords extends AppCompatActivity {
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
         if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1620);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1620);
+            this.f001 = viewLocatedAt(imv3).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.thrue);
+            HowScore(ArrayListWord.length);
+            score.setText(""+getCounter());
         } else if (listBuffer.contains(KeyWord)){
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1620);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1620);
+            this.f001 = viewLocatedAt(imv3).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.wrong);
             Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }  else  {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1620);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1620);
+            this.f001 = viewLocatedAt(imv3).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek2.setBackgroundResource(R.drawable.wrong);
-
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }
         EneblendButtonsAffterPress();
         listBuffer.add(KeyWord);
@@ -391,25 +583,39 @@ public class SewralWords extends AppCompatActivity {
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
         if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1820);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1820);
+            this.f001 = viewLocatedAt(imv4).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
-            chek2.setBackgroundResource(R.drawable.thrue);
+            chek3.setBackgroundResource(R.drawable.thrue);
+            HowScore(ArrayListWord.length);
+            score.setText(""+getCounter());
         } else if (listBuffer.contains(KeyWord)){
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1820);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1820);
+            this.f001 = viewLocatedAt(imv4).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek3.setBackgroundResource(R.drawable.wrong);
             Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }  else  {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(1820);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(1820);
+            this.f001 = viewLocatedAt(imv4).y - (pr1.getHeight()/4 );
+            LineY_1.clear();
+            LineY_1.add(f001);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek3.setBackgroundResource(R.drawable.wrong);
-
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }
         EneblendButtonsAffterPress();
         listBuffer.add(KeyWord);
@@ -421,25 +627,30 @@ public class SewralWords extends AppCompatActivity {
         String[] ArrayListWord = MainListWord.toArray(new String[0]);
         String KeyWord = (String.join("", ArrayListWord));
         if (listControl.contains(KeyWord) && !listBuffer.contains(KeyWord)) {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(2020);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(2020);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.thrue);
+            HowScore(ArrayListWord.length);
+            score.setText(""+getCounter());
         } else if (listBuffer.contains(KeyWord)){
-            this.LineY_1.remove(0);
-            this.LineY_1.add(2020);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(2020);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.wrong);
             Toast.makeText(this, "Повтор слова, такое уже есть", Toast.LENGTH_SHORT).show();
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }  else  {
-            this.LineY_1.remove(0);
-            this.LineY_1.add(2020);
+//            this.LineY_1.remove(0);
+//            this.LineY_1.add(2020);
             this.ListCoordinateX_1.removeAll(ListCoordinateX_1);
             ListXUpFull();
             chek4.setBackgroundResource(R.drawable.wrong);
-
+            setCounter(getCounter()-1);
+            score.setText(""+getCounter());
         }
         EneblendButtonsAffterPress();
         listBuffer.add(KeyWord);
@@ -481,16 +692,13 @@ public class SewralWords extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Creates(){
-
-
-
         button1 = ObjectAnimator.ofPropertyValuesHolder(pr1,
                 PropertyValuesHolder.ofFloat("x", 0, 850),
                 PropertyValuesHolder.ofFloat("y", 140, 1050));
         button1.setDuration(9000);
         button1.setRepeatCount(ObjectAnimator.INFINITE);
         button1.setRepeatMode(ObjectAnimator.REVERSE);
-        button1.start();
+//        button1.start();
 //2 кнопка
         button2 = ObjectAnimator.ofPropertyValuesHolder(pr2,
                 PropertyValuesHolder.ofFloat("x", 200, 400),
@@ -498,7 +706,7 @@ public class SewralWords extends AppCompatActivity {
         button2.setDuration(4400 +  getSpeed());
         button2.setRepeatCount(ObjectAnimator.INFINITE);
         button2.setRepeatMode(ObjectAnimator.REVERSE);
-        button2.start();
+//        button2.start();
 //3 кнопка
         button3 = ObjectAnimator.ofPropertyValuesHolder(pr3,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
@@ -506,7 +714,7 @@ public class SewralWords extends AppCompatActivity {
         button3.setDuration(5000 +  getSpeed());
         button3.setRepeatCount(ObjectAnimator.INFINITE);
         button3.setRepeatMode(ObjectAnimator.REVERSE);
-        button3.start();
+//        button3.start();
 //4 кнопка
         button4 = ObjectAnimator.ofPropertyValuesHolder(pr4,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
@@ -514,7 +722,7 @@ public class SewralWords extends AppCompatActivity {
         button4.setDuration(4600 +  getSpeed());
         button4.setRepeatCount(ObjectAnimator.INFINITE);
         button4.setRepeatMode(ObjectAnimator.REVERSE);
-        button4.start();
+//        button4.start();
 //5 кнопка
         button5 = ObjectAnimator.ofPropertyValuesHolder(pr5,
                 PropertyValuesHolder.ofFloat("x", 0, 910),
@@ -522,7 +730,7 @@ public class SewralWords extends AppCompatActivity {
         button5.setDuration(5300 +  getSpeed());
         button5.setRepeatCount(ObjectAnimator.INFINITE);
         button5.setRepeatMode(ObjectAnimator.REVERSE);
-        button5.start();
+//        button5.start();
 //6 кнопка
         button6 = ObjectAnimator.ofPropertyValuesHolder(pr6,
                 PropertyValuesHolder.ofFloat("x", 910, 0),
@@ -530,7 +738,7 @@ public class SewralWords extends AppCompatActivity {
         button6.setDuration(5600 +  getSpeed());
         button6.setRepeatCount(ObjectAnimator.INFINITE);
         button6.setRepeatMode(ObjectAnimator.REVERSE);
-        button6.start();
+//        button6.start();
 //7 кнопка
         button7 = ObjectAnimator.ofPropertyValuesHolder(pr7,
                 PropertyValuesHolder.ofFloat("x", 910, 0),
@@ -538,7 +746,7 @@ public class SewralWords extends AppCompatActivity {
         button7.setDuration(4400 +  getSpeed());
         button7.setRepeatCount(ObjectAnimator.INFINITE);
         button7.setRepeatMode(ObjectAnimator.REVERSE);
-        button7.start();
+//        button7.start();
 //8 кнопка
         button8 = ObjectAnimator.ofPropertyValuesHolder(pr8,
                 PropertyValuesHolder.ofFloat("x", 200, 650),
@@ -546,7 +754,7 @@ public class SewralWords extends AppCompatActivity {
         button8.setDuration(3900 +  getSpeed());
         button8.setRepeatCount(ObjectAnimator.INFINITE);
         button8.setRepeatMode(ObjectAnimator.REVERSE);
-        button8.start();
+//        button8.start();
 //9 кнопка не настроил
         button9 = ObjectAnimator.ofPropertyValuesHolder(pr9,
                 PropertyValuesHolder.ofFloat("x", 800, 800),
@@ -554,7 +762,7 @@ public class SewralWords extends AppCompatActivity {
         button9.setDuration(4100 +  getSpeed());
         button9.setRepeatCount(ObjectAnimator.INFINITE);
         button9.setRepeatMode(ObjectAnimator.REVERSE);
-        button9.start();
+//        button9.start();
 //10 кнопка
         button10 = ObjectAnimator.ofPropertyValuesHolder(pr10,
                 PropertyValuesHolder.ofFloat("x", 0, 250),
@@ -562,7 +770,7 @@ public class SewralWords extends AppCompatActivity {
         button10.setDuration(4500 +  getSpeed());
         button10.setRepeatCount(ObjectAnimator.INFINITE);
         button10.setRepeatMode(ObjectAnimator.REVERSE);
-        button10.start();
+//        button10.start();
 //11 кнопка
         button11 = ObjectAnimator.ofPropertyValuesHolder(pr11,
                 PropertyValuesHolder.ofFloat("x", 910, 100),
@@ -570,7 +778,7 @@ public class SewralWords extends AppCompatActivity {
         button11.setDuration(5700 +  getSpeed());
         button11.setRepeatCount(ObjectAnimator.INFINITE);
         button11.setRepeatMode(ObjectAnimator.REVERSE);
-        button11.start();
+//        button11.start();
 //12 кнопка
         button12 = ObjectAnimator.ofPropertyValuesHolder(pr12,
                 PropertyValuesHolder.ofFloat("x", 700, 400),
@@ -578,7 +786,7 @@ public class SewralWords extends AppCompatActivity {
         button12.setDuration(3600 +  getSpeed());
         button12.setRepeatCount(ObjectAnimator.INFINITE);
         button12.setRepeatMode(ObjectAnimator.REVERSE);
-        button12.start();
+//        button12.start();
 
 //13 кнопка
         button13 = ObjectAnimator.ofPropertyValuesHolder(pr13,
@@ -587,7 +795,7 @@ public class SewralWords extends AppCompatActivity {
         button13.setDuration(5100 +  getSpeed());
         button13.setRepeatCount(ObjectAnimator.INFINITE);
         button13.setRepeatMode(ObjectAnimator.REVERSE);
-        button13.start();
+//        button13.start();
 //14 кнопка
         button14 = ObjectAnimator.ofPropertyValuesHolder(pr14,
                 PropertyValuesHolder.ofFloat("x", 500, 500),
@@ -595,7 +803,7 @@ public class SewralWords extends AppCompatActivity {
         button14.setDuration(4800 +  getSpeed());
         button14.setRepeatCount(ObjectAnimator.INFINITE);
         button14.setRepeatMode(ObjectAnimator.REVERSE);
-        button14.start();
+//        button14.start();
 
 //рерзевное создание через XML
 //        set1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.upper1); // диагональ, с 0
@@ -641,12 +849,11 @@ public class SewralWords extends AppCompatActivity {
 ////        set13.start();
 ////        set14.start();   ht
 
-
-
-
     } //движение кнопок
+
+
     public void ClickButton1(View v){
-        Button copy_pr1 = new Button(getApplicationContext());
+        copy_pr1 = new Button(getApplicationContext());
         copy_pr1.setBackgroundResource(R.drawable.newpate);
         copy_pr1.setText(pr1.getText().toString() );
 
@@ -666,7 +873,6 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
 
 
-
     } //кнопка 1
     public void ClickButton2(View v){
 //                 button2.end();
@@ -681,7 +887,12 @@ public class SewralWords extends AppCompatActivity {
 //        textSee.setText(String.valueOf(MainListWord));
 //        pr2.setEnabled(false);
 
-        Button copy_pr2 = new Button(getApplicationContext());
+//        int f3 = viewLocatedAt(imv5).y - (pr1.getHeight()/4 );
+//        LineY_1.clear();
+//        LineY_1.add(f3);
+//        LineY_1.add(001);
+
+        copy_pr2 = new Button(getApplicationContext());
         copy_pr2.setBackgroundResource(R.drawable.newpate);
         copy_pr2.setText(pr2.getText().toString() );
 
@@ -703,7 +914,7 @@ public class SewralWords extends AppCompatActivity {
 
     } //кнопка 2
     public void ClickButton3(View v){
-        Button copy_pr3 = new Button(getApplicationContext());
+        copy_pr3 = new Button(getApplicationContext());
         copy_pr3.setBackgroundResource(R.drawable.newpate);
         copy_pr3.setText(pr3.getText().toString() );
 
@@ -724,7 +935,7 @@ public class SewralWords extends AppCompatActivity {
 
     } //кнопка 3
     public void ClickButton4(View v){
-        Button copy_pr4 = new Button(getApplicationContext());
+        copy_pr4 = new Button(getApplicationContext());
         copy_pr4.setBackgroundResource(R.drawable.newpate);
         copy_pr4.setText(pr4.getText().toString() );
 
@@ -744,7 +955,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 4
     public void ClickButton5(View v){
-        Button copy_pr5 = new Button(getApplicationContext());
+        copy_pr5 = new Button(getApplicationContext());
         copy_pr5.setBackgroundResource(R.drawable.newpate);
         copy_pr5.setText(pr5.getText().toString() );
 
@@ -764,7 +975,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 5
     public void ClickButton6(View v){
-        Button copy_pr6 = new Button(getApplicationContext());
+        copy_pr6 = new Button(getApplicationContext());
         copy_pr6.setBackgroundResource(R.drawable.newpate);
         copy_pr6.setText(pr6.getText().toString() );
 
@@ -784,7 +995,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 6
     public void ClickButton7(View v){
-        Button copy_pr7 = new Button(getApplicationContext());
+        copy_pr7 = new Button(getApplicationContext());
         copy_pr7.setBackgroundResource(R.drawable.newpate);
         copy_pr7.setText(pr7.getText().toString() );
 
@@ -804,7 +1015,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 7
     public void ClickButton8(View v){
-        Button copy_pr8 = new Button(getApplicationContext());
+        copy_pr8 = new Button(getApplicationContext());
         copy_pr8.setBackgroundResource(R.drawable.newpate);
         copy_pr8.setText(pr8.getText().toString() );
 
@@ -824,7 +1035,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 8
     public void ClickButton9(View v){
-        Button copy_pr9 = new Button(getApplicationContext());
+        copy_pr9 = new Button(getApplicationContext());
         copy_pr9.setBackgroundResource(R.drawable.newpate);
         copy_pr9.setText(pr9.getText().toString() );
 
@@ -844,7 +1055,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 9
     public void ClickButton10(View v){
-        Button copy_pr10 = new Button(getApplicationContext());
+        copy_pr10 = new Button(getApplicationContext());
         copy_pr10.setBackgroundResource(R.drawable.newpate);
         copy_pr10.setText(pr10.getText().toString() );
 
@@ -864,7 +1075,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 10
     public void ClickButton11(View v){
-        Button copy_pr11 = new Button(getApplicationContext());
+        copy_pr11 = new Button(getApplicationContext());
         copy_pr11.setBackgroundResource(R.drawable.newpate);
         copy_pr11.setText(pr11.getText().toString() );
 
@@ -884,7 +1095,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 11
     public void ClickButton12(View v){
-        Button copy_pr12 = new Button(getApplicationContext());
+        copy_pr12 = new Button(getApplicationContext());
         copy_pr12.setBackgroundResource(R.drawable.newpate);
         copy_pr12.setText(pr12.getText().toString() );
 
@@ -904,7 +1115,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 12
     public void ClickButton13(View v){
-        Button copy_pr13 = new Button(getApplicationContext());
+        copy_pr13 = new Button(getApplicationContext());
         copy_pr13.setBackgroundResource(R.drawable.newpate);
         copy_pr13.setText(pr13.getText().toString() );
 
@@ -924,7 +1135,7 @@ public class SewralWords extends AppCompatActivity {
         textSee.setText(String.valueOf(MainListWord));
     } //кнопка 13
     public void ClickButton14(View v){
-        Button copy_pr14 = new Button(getApplicationContext());
+        copy_pr14 = new Button(getApplicationContext());
         copy_pr14.setBackgroundResource(R.drawable.newpate);
         copy_pr14.setText(pr14.getText().toString() );
 
